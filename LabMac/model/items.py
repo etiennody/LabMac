@@ -20,3 +20,25 @@ class Floor(Position):
 
     def is_empty(self):
         return self.content is None
+
+
+class Hero(Position):
+
+    def __init__(self, *args, **args):
+        super().__init__(*args, **kwargs)
+        self.weapons = []
+
+    def __repr__(self):
+        pos = super().__repr__()
+
+    def up():
+        pass
+
+    def down():
+        pass
+
+    def left():
+        pass
+
+    def right():
+        pass
