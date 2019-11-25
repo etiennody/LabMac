@@ -12,3 +12,4 @@ Github:
 START_MAZE = "S"
 EXIT_MAZE = "E"
 NUMBER_ITEMS = 3
+FLOOR = "0"
