@@ -36,3 +36,6 @@ class Maze:
                     self.floor.append(Floor(x, y))
                 else:
                     pass
+
+    def add_weapons(self):
+        pass
