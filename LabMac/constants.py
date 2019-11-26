@@ -11,5 +11,6 @@ Github:
 
 START_MAZE = "S"
 EXIT_MAZE = "E"
+FLOOR_MAZE = "0"
+WALL_MAZE = "x"
 NUMBER_ITEMS = 3
-FLOOR = "0"
