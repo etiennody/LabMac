@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 
 """
 Project 3 - OpenClassrooms: Aidez MacGyver à s'échapper !
@@ -10,7 +9,7 @@ Github:
 """
 
 
-import items
+from items import Floor
 from LabMac import constants
 
 
