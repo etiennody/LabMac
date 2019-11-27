@@ -7,20 +7,18 @@ Author:
 Github:
     https://github.com/etiennody
 """
-
+import random, sys
 
 from items import Floor
 from LabMac import constants
 
 
 class Maze:
-
     def __init__(self, filename):
         self.floor = []
         self.wall = []
         self.hero = None
         self.guardian = None
-        self.weapons = None
         self.load(filename)
 
     def load(self):
@@ -37,5 +35,11 @@ class Maze:
                 else:
                     pass
 
-    def add_weapons(self):
-        pass
+    def get_random_weapons(self, num_weapons):
+        # create a [x, y] list of weapons
+        weapons = []
+        while len(weapons) < num_weapons:
+            new_weapons = [random.randint(x, y)]
+            if new_weapons not in weapons:
+                weapons.append(new_weapons)
+        return weapons
