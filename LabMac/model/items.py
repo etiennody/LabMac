@@ -9,11 +9,10 @@ Github:
     https://github.com/etiennody
 """
 
-from position import Position
+from position import Position, Move
 
 
 class Floor(Position):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.content = None
@@ -22,27 +21,29 @@ class Floor(Position):
         return self.content is None
 
 
-class Hero(Position):
-
+class Hero(Position, Move):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.weapons = []
 
     def __repr__(self):
         pos = super().__repr__()
+        return f"Je suis le Hero dans la position {pos}"
 
-    def up():
-        pass
+    def move_hero_up(self, position):
+        self.position = Move(0, -1)
 
-    def down():
-        pass
+    def move_hero_down(self, position):
+        self.position = Move(0, 1)
 
-    def left():
-        pass
+    def move_hero_left(self, pos):
+        self.position = Move(-1, 0)
 
-    def right():
-        pass
+    def move_hero_right(self, pos):
+        self.position = Move(1, 0)
 
 
-class Guardian():
-    pass
+class Guardian(Position):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.position = self.exit
