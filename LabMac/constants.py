@@ -9,7 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
-START_MAZE = "S"
-EXIT_MAZE = "E"
-FLOOR_MAZE = "0"
-WALL_MAZE = "x"
+START_CHAR = "S"
+EXIT_CHAR = "E"
+FLOOR_CHAR = "0"
+WALL_CHAR = "x"
