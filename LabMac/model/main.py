@@ -26,7 +26,7 @@ def main(self):
             maze.move_hero_right()
 
     if maze.win():
-        print("WIN!!")
+        print("YOU WIN!!")
     if maze.loose():
         print("GAME OVER")
 
