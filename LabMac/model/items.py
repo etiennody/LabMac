@@ -42,3 +42,7 @@ class Hero(Position):
 
     def right():
         pass
+
+
+class Guardian():
+    pass
