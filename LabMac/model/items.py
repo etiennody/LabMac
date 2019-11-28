@@ -24,7 +24,7 @@ class Floor(Position):
 
 class Hero(Position):
 
-    def __init__(self, *args, **args):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.weapons = []
 
