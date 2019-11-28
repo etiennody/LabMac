@@ -6,8 +6,6 @@ import Maze.maze
 def main(self):
     maze = Maze()
     while True:
-        # Game initialisation
-        weapons = get_random_weapons(3)
         resp = input("where do you want to move (u, d, l r)?")
         if resp == "u":
             maze.move_hero_up()
