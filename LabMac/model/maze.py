@@ -21,7 +21,12 @@ class Maze:
         self.weapons = []
         self.hero = None
         self.guardian = None
+        self.start = None
+        self.exit = None
         self.load(filename)
+
+    def __contains__(self, position):
+        return position in self.floor
 
     def load(self):
         with open():
