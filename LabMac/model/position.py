@@ -29,5 +29,14 @@ class Move:
         self.mx = mx
         self.my = my
 
+    def up(self, mx, my):
+        return (0, -1)
 
+    def down(self, mx, my):
+        return (0, 1)
 
+    def left(self, mx, my):
+        return (-1, 0)
+
+    def right(self, mx, my):
+        return (1, 0)
