@@ -56,3 +56,9 @@ class Maze:
         self.hero = hero
         self.position = self.start
         self.hero.maze = self
+
+    def win(self, weapons, position):
+        return len(weapons) == 0 and self.position.hero == self.exit
+
+    def loose(self, weapons, position):
+        return len(weapons) > 0 and self.position.hero == self.exit
