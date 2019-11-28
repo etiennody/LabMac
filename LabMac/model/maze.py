@@ -50,8 +50,8 @@ class Maze:
         # create a [x, y] list of weapons
         weapons = []
         while len(weapons) < num_weapons:
-            new_weapons = [
-                random.sample(list(self.floor) - {self.start, self.exit}, 3)
+            new_weapons = [random.sample(
+                list(self.floor) - {self.start, self.exit}, num_weapons)
             ]
             if new_weapons not in weapons:
                 weapons.append(new_weapons)
