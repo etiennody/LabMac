@@ -21,3 +21,13 @@ class Position:
     def set_position(self, x, y):
         self.x = x
         self.y = y
+
+
+class Move:
+
+    def __init__(self, mx, my):
+        self.mx = mx
+        self.my = my
+
+
+
