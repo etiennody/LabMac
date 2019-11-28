@@ -16,7 +16,7 @@ class Position:
         self.set_position(x, y)
 
     def __repr__(self):
-        return str(Position({self.x}, {self.y}))
+        return f"Position({self.x}, {self.y})"
 
     def set_position(self, x, y):
         self.x = x
