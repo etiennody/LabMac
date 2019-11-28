@@ -24,6 +24,7 @@ class Floor(Position):
 class Hero(Position, Move):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.inventory = []
 
     def __repr__(self):
         pos = super().__repr__()
@@ -40,6 +41,11 @@ class Hero(Position, Move):
 
     def move_hero_right(self, set_position):
         self.set_position.right
+
+    def in_inventory(self):
+        self.inventory.append(self.set_position)
+        return "You have picked up an object"
+        return f"You have {len(self.inventory)} weapons in your inventory"
 
 
 class Guardian(Position):
