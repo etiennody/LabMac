@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -7,6 +8,7 @@ Author:
 Github:
     https://github.com/etiennody
 """
+
 import random
 
 from Labmac import constants as char
@@ -24,6 +26,7 @@ class Maze:
         self.start = None
         self.exit = None
         self.load(filename)
+        self.get_random_weapons()
 
     def __contains__(self, position):
         return position in self.floor
@@ -47,7 +50,9 @@ class Maze:
         # create a [x, y] list of weapons
         weapons = []
         while len(weapons) < num_weapons:
-            new_weapons = [random.randint(self.floor)]
+            new_weapons = [
+                random.sample(list(self.floor) - {self.start, self.exit}, 3)
+            ]
             if new_weapons not in weapons:
                 weapons.append(new_weapons)
         return weapons
