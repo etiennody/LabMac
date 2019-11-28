@@ -24,23 +24,22 @@ class Floor(Position):
 class Hero(Position, Move):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.weapons = []
 
     def __repr__(self):
         pos = super().__repr__()
         return f"Je suis le Hero dans la position {pos}"
 
-    def move_hero_up(self, position):
-        self.position = Move(0, -1)
+    def move_hero_up(self, set_position):
+        self.set_position.up
 
-    def move_hero_down(self, position):
-        self.position = Move(0, 1)
+    def move_hero_down(self, set_position):
+        self.set_position.down
 
-    def move_hero_left(self, pos):
-        self.position = Move(-1, 0)
+    def move_hero_left(self, set_position):
+        self.set_position.left
 
-    def move_hero_right(self, pos):
-        self.position = Move(1, 0)
+    def move_hero_right(self, set_position):
+        self.set_position.right
 
 
 class Guardian(Position):
