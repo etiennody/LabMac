@@ -24,7 +24,6 @@ def main(self):
             maze.move_hero_left()
         if resp == "r":
             maze.move_hero_right()
-
     if maze.win():
         print("YOU WIN!!")
     if maze.loose():
