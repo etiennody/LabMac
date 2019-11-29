@@ -44,7 +44,7 @@ class Hero(Position, Move):
 
     def in_inventory(self):
         self.inventory.append(self.set_position)
-        return "You have picked up an object"
+        return "You have found a weapon"
         return f"You have {len(self.inventory)} weapons in your inventory"
 
 
