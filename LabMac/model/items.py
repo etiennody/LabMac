@@ -50,6 +50,3 @@ class Hero(Position, Move):
 
 class Guardian(Position):
     pass
-#    def __init__(self, *args, **kwargs):
-#        super().__init__(*args, **kwargs)
-#        self.position = self.exit
