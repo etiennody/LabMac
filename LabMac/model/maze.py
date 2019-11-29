@@ -11,6 +11,7 @@ Github:
 
 import random
 
+import Labmac.constants as cs
 from LabMac.constants import START_CHAR, EXIT_CHAR, FLOOR_CHAR, WALL_CHAR
 from .position import Position
 from .items import Floor, Hero
@@ -36,14 +37,14 @@ class Maze:
             lines = f.readlines()
             for y, line in enumerate(lines):
                 for x, character in enumerate(line):
-                    if character == Position.FLOOR_CHAR:
+                    if character == cs.FLOOR_CHAR:
                         self.floor.append(Position(x, y))
-                    elif character == Position.WALL_CHAR:
+                    elif character == cs.WALL_CHAR:
                         self.wall.append(Position(x, y))
-                    elif character == Position.START_CHAR:
+                    elif character == cs.START_CHAR:
                         self.start == Position(x, y)
                         self.floor.append(Position(x, y))
-                    elif character == Position.EXIT_CHAR:
+                    elif character == cs.EXIT_CHAR:
                         self.exit = Position(x, y)
                         self.floor.append(Position(x, y))
                     else:
@@ -66,4 +67,22 @@ class Maze:
     def loose(self, weapons, position):
         return len(weapons) > 0 and self.position.hero == self.exit
 
-    def can_move
+    def can_move_to(self, x, y):
+        if Position(x, y) in self.floor:
+            self
+
+    def move_hero_up(self):
+        if self.can_move_to(self.hero.x - 1, self.hero.y):
+            self.hero.up()
+
+    def move_hero_down(self):
+        if self.can_move_to(self.hero.x + 1, self.hero.y):
+            self.hero.down()
+
+    def move_hero_left(self):
+        if self.can_move_to(self.hero.x, self.hero.y - 1):
+            self.hero.left()
+
+    def move_hero_right(self):
+        if self.can_move_to(self.hero.x, self.hero.y + 1):
+            self.hero.right()
