@@ -12,9 +12,7 @@ Github:
 import random
 
 import Labmac.constants as cs
-from LabMac.constants import START_CHAR, EXIT_CHAR, FLOOR_CHAR, WALL_CHAR
 from .position import Position
-from .items import Floor, Hero
 
 
 class Maze:
