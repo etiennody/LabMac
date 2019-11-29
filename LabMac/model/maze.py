@@ -31,23 +31,26 @@ class Maze:
     def __contains__(self, position):
         return position in self.floor
 
-    def load(self):
-        with open():
-            for x in range(0, 15):
-                for y in range(0, 15):
-                    if char == Position.FLOOR_CHAR:
-                        self.floor.append(Floor(x, y))
-                    elif char == Position.START_CHAR:
-                        self.hero = Hero(x, y)
-                        self.floor.append(Floor(x, y))
-                    elif char == Position.EXIT_CHAR:
-                        self.guardian = Position.Guardian(x, y)
-                        self.floor.append(Floor(x, y))
+    def load(self, filename):
+        with open(filename) as f:
+            lines = f.readlines()
+            for y, line in enumerate(lines):
+                for x, character in enumerate(line):
+                    if character == Position.FLOOR_CHAR:
+                        self.floor.append(Position(x, y))
+                    elif character == Position.WALL_CHAR:
+                        self.wall.append(Position(x, y))
+                    elif character == Position.START_CHAR:
+                        self.start == Position(x, y)
+                        self.floor.append(Position(x, y))
+                    elif character == Position.EXIT_CHAR:
+                        self.exit = Position(x, y)
+                        self.floor.append(Position(x, y))
                     else:
-                        return "It's a wall"
+                        continue
 
-    def get_random_position(self, num_weapons):
-        # create a [x, y] list of weapons
+    def get_weapon_position(self, num_weapons):
+        # create a [x, y] list of weapons and take position randomly
         weapons = []
         while len(weapons) < num_weapons:
             new_weapons = [random.sample(
@@ -57,13 +60,10 @@ class Maze:
                 weapons.append(new_weapons)
         return weapons
 
-#    def add_hero(self, hero):
-#        self.hero = hero
-#        self.position = self.start
-#       self.hero.maze = self
-
     def win(self, weapons, position):
         return len(weapons) == 0 and self.position.hero == self.exit
 
     def loose(self, weapons, position):
         return len(weapons) > 0 and self.position.hero == self.exit
+
+    def can_move
