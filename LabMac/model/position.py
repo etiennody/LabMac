@@ -23,20 +23,20 @@ class Position:
         self.y = y
 
 
-class Move:
+class MoveablePosition(Position):
 
     def __init__(self, mx, my):
         self.mx = mx
         self.my = my
 
-    def up(self, mx, my):
-        return (0, -1)
+    def up(self):
+        self.x -= 1
 
-    def down(self, mx, my):
-        return (0, 1)
+    def down(self):
+        self.x += 1
 
-    def left(self, mx, my):
-        return (-1, 0)
+    def left(self):
+        self.x -= 1
 
-    def right(self, mx, my):
-        return (1, 0)
+    def right(self):
+        self.x += 1
