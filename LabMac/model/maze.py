@@ -66,8 +66,8 @@ class Maze:
         return len(weapons) > 0 and self.position.hero == self.exit
 
     def can_move_to(self, x, y):
-        if Position(x, y) in self.floor:
-            self
+        if Position(x, y) in self.maze.floor:
+            pass
 
     def move_hero_up(self):
         if self.can_move_to(self.hero.x - 1, self.hero.y):
