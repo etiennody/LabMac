@@ -25,6 +25,7 @@ class Hero(Position, MoveablePosition):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.inventory = []
+        self.set_position = self.maze.start
 
     def __repr__(self):
         pos = super().__repr__()
