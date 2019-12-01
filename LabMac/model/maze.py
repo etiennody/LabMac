@@ -56,23 +56,3 @@ class Maze:
         self.weapons = random.sample(
             set(self.floor) - {self.start, self.exit}, 3)
         return self.weapons
-
-    def can_move_to(self, x, y):
-        if Position(x, y) in self.maze.floor:
-            pass
-
-    def move_hero_up(self):
-        if self.can_move_to(self.hero.x - 1, self.hero.y):
-            self.hero.up()
-
-    def move_hero_down(self):
-        if self.can_move_to(self.hero.x + 1, self.hero.y):
-            self.hero.down()
-
-    def move_hero_left(self):
-        if self.can_move_to(self.hero.x, self.hero.y - 1):
-            self.hero.left()
-
-    def move_hero_right(self):
-        if self.can_move_to(self.hero.x, self.hero.y + 1):
-            self.hero.right()
