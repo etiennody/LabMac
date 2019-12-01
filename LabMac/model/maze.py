@@ -11,7 +11,7 @@ Github:
 
 import random
 
-import Labmac.constants as cs
+from LabMac.constants import FLOOR_CHAR, WALLS_CHAR, START_CHAR, EXIT_CHAR
 from .position import Position
 
 
@@ -24,29 +24,32 @@ class Maze:
         self.guardian = None
         self.start = None
         self.exit = None
-        self.load(filename)
-        self.get_random_weapons()
+        self.width = None
+        self.height = None
+        self.filename = filename
+        self.random_position_weapons()
 
-    def __contains__(self, position):
-        return position in self.floor
+    # def __contains__(self, position):
+    #     return position in self.floor
 
+    # Associate a character to a position from a text file
     def load(self, filename):
         with open(filename) as f:
             lines = f.readlines()
-            for y, line in enumerate(lines):
-                for x, character in enumerate(line):
-                    if character == cs.FLOOR_CHAR:
-                        self.floor.append(Position(x, y))
-                    elif character == cs.WALL_CHAR:
-                        self.wall.append(Position(x, y))
-                    elif character == cs.START_CHAR:
-                        self.start == Position(x, y)
-                        self.floor.append(Position(x, y))
-                    elif character == cs.EXIT_CHAR:
-                        self.exit = Position(x, y)
-                        self.floor.append(Position(x, y))
-                    else:
-                        continue
+            for n_row, line in enumerate(lines):
+                for n_col, character in enumerate(line):
+                    if character == FLOOR_CHAR:
+                        self.floor.append(Position(n_row, n_col))
+                    elif character == WALLS_CHAR:
+                        self.walls.append(Position(n_row, n_col))
+                    elif character == START_CHAR:
+                        self.start = Position(n_row, n_col)
+                        self.floor.append(Position(n_row, n_col))
+                    elif character == EXIT_CHAR:
+                        self.exit = Position(n_row, n_col)
+                        self.floor.append(Position(n_row, n_col))
+                    self.width = n_col
+                    self.height = n_row
 
     def get_weapon_position(self, num_weapons):
         # create a [x, y] list of weapons and take position randomly
