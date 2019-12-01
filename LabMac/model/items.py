@@ -9,19 +9,19 @@ Github:
     https://github.com/etiennody
 """
 
-from position import Position, MoveablePosition
+from position import MoveablePosition
 
 
-class Floor(Position):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.content = None
+# class Floor(Position):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.content = None
 
-    def is_empty(self):
-        return self.content is None
+#     def is_empty(self):
+#         return self.content is None
 
 
-class Hero(Position, MoveablePosition):
+class Hero (MoveablePosition):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.inventory = []
@@ -31,11 +31,23 @@ class Hero(Position, MoveablePosition):
         pos = super().__repr__()
         return f"Je suis le Hero dans la position {pos}"
 
+    def move_hero_up(self, set_position):
+        self.set_position.up
+
+    def move_hero_down(self, set_position):
+        self.set_position.down
+
+    def move_hero_left(self, set_position):
+        self.set_position.left
+
+    def move_hero_right(self, set_position):
+        self.set_position.right
+
     def in_inventory(self):
         self.inventory.append(self.set_position)
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapons in your inventory"
 
 
-class Guardian(Position):
-    pass
+# class Guardian(Position):
+#     pass
