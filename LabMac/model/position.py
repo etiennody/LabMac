@@ -26,9 +26,9 @@ class Position:
 
 class MoveablePosition(Position):
     # Possibles positions to Up, Down, Left and Right
-    def __init__(self, mx, my):
-        self.mx = mx
-        self.my = my
+    # def __init__(self, mx, my):
+    #     self.mx = mx
+    #     self.my = my
 
     def up(self):
         self.x -= 1
