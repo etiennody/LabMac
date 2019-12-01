@@ -60,6 +60,7 @@ class Game:
                 self.hero.end_game()
                 self.open = False
 
+
 def main(self):
     # Launch the game
     game = Game()
