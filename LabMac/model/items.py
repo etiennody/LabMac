@@ -9,7 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
-from position import Position, MoveablePosition
+from .position import Position, MoveablePosition
 
 
 # class Floor(Position):
