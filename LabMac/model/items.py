@@ -43,10 +43,19 @@ class Hero (MoveablePosition):
     def move_hero_right(self, set_position):
         self.set_position.right
 
+    # Put weapons in inventory
     def in_inventory(self):
         self.inventory.append(self.set_position)
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapons in your inventory"
+
+    # Get the three weapons to put the guardian to sleep and exit the maze
+    def end_game(self):
+        if len(self.inventory) == 3:
+            print("YOU WIN")
+        else:
+            print("GAME OVER")
+
 
 
 # class Guardian(Position):
