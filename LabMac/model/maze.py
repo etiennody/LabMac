@@ -51,22 +51,11 @@ class Maze:
                     self.width = n_col
                     self.height = n_row
 
-    def get_weapon_position(self, num_weapons):
-        # create a [x, y] list of weapons and take position randomly
-        weapons = []
-        while len(weapons) < num_weapons:
-            new_weapons = [random.sample(
-                list(self.floor) - {self.start, self.exit}, num_weapons)
-            ]
-            if new_weapons not in weapons:
-                weapons.append(new_weapons)
-        return weapons
-
-    def win(self, weapons, position):
-        return len(weapons) == 0 and self.position.hero == self.exit
-
-    def loose(self, weapons, position):
-        return len(weapons) > 0 and self.position.hero == self.exit
+    # get random position for weapons
+    def random_position_weapons(self):
+        self.weapons = random.sample(
+            set(self.floor) - {self.start, self.exit}, 3)
+        return self.weapons
 
     def can_move_to(self, x, y):
         if Position(x, y) in self.maze.floor:
