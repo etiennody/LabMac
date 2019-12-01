@@ -9,7 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
-from position import MoveablePosition
+from position import Position, MoveablePosition
 
 
 # class Floor(Position):
@@ -31,17 +31,25 @@ class Hero (MoveablePosition):
         pos = super().__repr__()
         return f"Je suis le Hero dans la position {pos}"
 
-    def move_hero_up(self, set_position):
-        self.set_position.up
+    def can_move_to(self, x, y):
+        if Position(x, y) in self.maze.floor:
+            pass
 
-    def move_hero_down(self, set_position):
-        self.set_position.down
+    def move_hero_up(self):
+        if self.can_move_to(self.hero.x - 1, self.hero.y):
+            self.hero.up()
 
-    def move_hero_left(self, set_position):
-        self.set_position.left
+    def move_hero_down(self):
+        if self.can_move_to(self.hero.x + 1, self.hero.y):
+            self.hero.down()
 
-    def move_hero_right(self, set_position):
-        self.set_position.right
+    def move_hero_left(self):
+        if self.can_move_to(self.hero.x, self.hero.y - 1):
+            self.hero.left()
+
+    def move_hero_right(self):
+        if self.can_move_to(self.hero.x, self.hero.y + 1):
+            self.hero.right()
 
     # Put weapons in inventory
     def in_inventory(self):
