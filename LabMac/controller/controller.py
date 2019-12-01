@@ -10,21 +10,61 @@ Github:
 """
 
 from LabMac.model.maze import Maze
+from LabMac.model.items import Hero
 
+
+class Game:
+    def __init__(self):
+        self.maze = Maze("resources/map/map.txt")
+        self.hero = Hero(self.maze)
+        self.user = None
+        self.open = False
+
+    def quit(self):
+        # Quit the game
+        self.open = False
+
+    def try_to_move(self):
+        # Check requested directions
+        while True:
+            self.user = input("Where do you want to move \
+                              U for up , d dor down, l for left, r for right \
+                              or q to quit the game)?")
+            if self.user == "u":
+                self.maze.move_hero_up()
+            elif self.user == "d":
+                self.maze.move_hero_down()
+            elif self.user == "l":
+                self.maze.move_hero_left()
+            elif self.user == "r":
+                self.maze.move_hero_right()
+            elif self.user == "q":
+                self.maze.quit()
+
+    def loop(self):
+        # Launching the loop as long as the game is open
+        self.open = True
+        while self.open:
+            self.maze()
+            if self.hero.set_position in self.maze.weapon:
+                if self.hero.set_position in self.maze.in_inventory:
+                    pass
+                else:
+                    self.hero.random_position_weapons()
+            self.try_to_move()
+            if self.user == "q":
+                self.open = False
+            else:
+                self.hero.try_to_move(self.user)
+            if self.set_position == self.maze.exit:
+                self.hero.end_game()
+                self.open = False
 
 def main(self):
-    maze = Maze()
-    while True:
-        resp = input("where do you want to move (u, d, l r)?")
-        if resp == "u":
-            maze.move_hero_up()
-        if resp == "d":
-            maze.move_hero_down()
-        if resp == "l":
-            maze.move_hero_left()
-        if resp == "r":
-            maze.move_hero_right()
-    if maze.win():
-        print("YOU WIN!!")
-    if maze.loose():
-        print("GAME OVER")
+    # Launch the game
+    game = Game()
+    game.loop()
+
+
+if __name__ == "__main__":
+    main()
