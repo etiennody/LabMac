@@ -64,7 +64,5 @@ class Hero (MoveablePosition):
         else:
             print("GAME OVER")
 
-
-
 # class Guardian(Position):
 #     pass
