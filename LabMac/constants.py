@@ -9,6 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
+# Default game constants definition
 START_CHAR = "S"
 EXIT_CHAR = "E"
 FLOOR_CHAR = "0"
