@@ -18,7 +18,7 @@ from .position import Position
 class Maze:
     def __init__(self, filename):
         self.floor = []
-        self.wall = []
+        # self.wall = []
         self.weapons = []
         self.hero = None
         self.guardian = None
@@ -26,7 +26,7 @@ class Maze:
         self.exit = None
         self.width = None
         self.height = None
-        self.filename = filename
+        self.load(filename)
         self.random_position_weapons()
 
     # def __contains__(self, position):
@@ -40,8 +40,8 @@ class Maze:
                 for n_col, character in enumerate(line):
                     if character == FLOOR_CHAR:
                         self.floor.append(Position(n_row, n_col))
-                    elif character == WALLS_CHAR:
-                        self.walls.append(Position(n_row, n_col))
+                    # elif character == WALLS_CHAR:
+                    #     self.walls.append(Position(n_row, n_col))
                     elif character == START_CHAR:
                         self.start = Position(n_row, n_col)
                         self.floor.append(Position(n_row, n_col))
