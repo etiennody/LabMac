@@ -15,7 +15,7 @@ from LabMac.model.items import Hero
 
 class Game:
     def __init__(self):
-        self.maze = Maze("resources/map/map.txt")
+        self.maze = Maze(".LabMac/resources/map/map.txt")
         self.hero = Hero(self.maze)
         self.user = None
         self.open = False
@@ -61,11 +61,11 @@ class Game:
                 self.open = False
 
 
-def main(self):
+def main():
     # Launch the game
     game = Game()
     game.loop()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
