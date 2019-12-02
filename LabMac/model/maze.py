@@ -82,7 +82,7 @@ class Maze:
                 if self.hero == weapon:
                     self.hero.pick_up_weapon()
 
-    # get random position for weapons
+    # get random positions for weapons
     def random_positions_weapons(self):
         self.random_positions = random.sample(
             set(self.floor) - {self.start, self.exit}, 3)
