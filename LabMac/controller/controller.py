@@ -39,7 +39,7 @@ class Game:
             elif self.user == "q":
                 self.maze.quit()
 
-            result = self.maze.check_end_game()
+            result = self.maze.fight_guardian()
             if result is None:
                 continue
             if result:
