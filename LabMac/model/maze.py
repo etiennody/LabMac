@@ -21,7 +21,7 @@ class Maze:
         # self.walls = []
         self.weapons = []
         self.hero = None
-        self.guardian = None
+        # self.guardian = None
         self.start = None
         self.exit = None
         self.width = None
@@ -36,6 +36,8 @@ class Maze:
     def load(self, filename):
         with open(filename) as f:
             lines = f.readlines()
+            self.width = len(lines)
+            self.height = len(lines[0])
             for n_row, line in enumerate(lines):
                 for n_col, character in enumerate(line):
                     if character == FLOOR_CHAR:
@@ -48,11 +50,42 @@ class Maze:
                     elif character == EXIT_CHAR:
                         self.exit = Position(n_row, n_col)
                         self.floor.append(Position(n_row, n_col))
-                    self.width = n_col
-                    self.height = n_row
+
+    def can_move_to(self, x, y):
+        return Position(x, y) in self.maze.floor
+
+    def move_hero_up(self):
+        if self.can_move_to(self.hero.x - 1, self.hero.y):
+            self.hero.up()
+            for weapon in self.weapons:
+                if self.hero == weapon:
+                    self.hero.pick_up_weapon()
+
+    def move_hero_down(self):
+        if self.can_move_to(self.hero.x + 1, self.hero.y):
+            self.hero.down()
+            for weapon in self.weapons:
+                if self.hero == weapon:
+                    self.hero.pick_up_weapon()
+
+    def move_hero_left(self):
+        if self.can_move_to(self.hero.x, self.hero.y - 1):
+            self.hero.left()
+            for weapon in self.weapons:
+                if self.hero == weapon:
+                    self.hero.pick_up_weapon()
+
+    def move_hero_right(self):
+        if self.can_move_to(self.hero.x, self.hero.y + 1):
+            self.hero.right()
+            for weapon in self.weapons:
+                if self.hero == weapon:
+                    self.hero.pick_up_weapon()
 
     # get random position for weapons
-    def random_position_weapons(self):
-        self.weapons = random.sample(
+    def random_positions_weapons(self):
+        self.random_positions = random.sample(
             set(self.floor) - {self.start, self.exit}, 3)
-        return self.weapons
+        weapons = ["ether", "pipe", "needle"]
+        for position in random_positions():
+            self.weapons.append(Weapons(x=position.x, y=position.y, name=weapons.pop())
