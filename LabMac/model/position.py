@@ -18,6 +18,12 @@ class Position:
     def __repr__(self):
         return f"Position({self.x}, {self.y})"
 
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+    def __hash__(self):
+        return hash(self.set_position)
+
     # x, y : positions
     def set_position(self, x, y):
         self.x = x
@@ -37,7 +43,7 @@ class MoveablePosition(Position):
         self.x += 1
 
     def left(self):
-        self.x -= 1
+        self.y -= 1
 
     def right(self):
-        self.x += 1
+        self.y += 1
