@@ -31,29 +31,15 @@ class Hero (MoveablePosition):
         pos = super().__repr__()
         return f"Je suis le Hero dans la position {pos}"
 
-    def can_move_to(self, x, y):
-        if Position(x, y) in self.maze.floor:
-            pass
+    # Put weapon name in inventory
+    def pick_up_weapon(self, weapon):
+        self.in_inventory.add(weapon)
+        weapon.x = None
+        weapon.y = None
 
-    def move_hero_up(self):
-        if self.can_move_to(self.hero.x - 1, self.hero.y):
-            self.hero.up()
-
-    def move_hero_down(self):
-        if self.can_move_to(self.hero.x + 1, self.hero.y):
-            self.hero.down()
-
-    def move_hero_left(self):
-        if self.can_move_to(self.hero.x, self.hero.y - 1):
-            self.hero.left()
-
-    def move_hero_right(self):
-        if self.can_move_to(self.hero.x, self.hero.y + 1):
-            self.hero.right()
-
-    # Put weapons in inventory
+    # Put positions weapons in inventory
     def in_inventory(self):
-        self.inventory.append(self.set_position)
+        self.in_inventory.append(self.set_position)
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapons in your inventory"
 
@@ -63,6 +49,12 @@ class Hero (MoveablePosition):
             print("YOU WIN")
         else:
             print("GAME OVER")
+
+
+class Weapon(Position):
+    def __init__(self, name, *args, **kwargs):
+        self.name = name
+
 
 # class Guardian(Position):
 #     pass
