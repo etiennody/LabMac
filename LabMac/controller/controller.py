@@ -15,7 +15,7 @@ from LabMac.model.items import Hero
 
 class Game:
     def __init__(self):
-        self.maze = Maze("LabMac/resources/map/map.txt")
+        self.maze = Maze("./LabMac/resources/map/map.txt")
         self.hero = Hero(self.maze)
         self.user = None
         self.open = False
@@ -47,24 +47,24 @@ class Game:
             else:
                 print("YOU LOOSE")
 
-    def loop(self):
-        # Launching the loop as long as the game is open
-        self.open = True
-        while self.open:
-            self.maze()
-            if self.hero.set_position in self.maze.weapon:
-                if self.hero.set_position in self.maze.in_inventory:
-                    pass
-                else:
-                    self.hero.random_position_weapons()
-            self.try_to_move()
-            if self.user == "q":
-                self.open = False
-            else:
-                self.hero.try_to_move(self.user)
-            if self.set_position == self.maze.exit:
-                self.hero.end_game()
-                self.open = False
+    # def loop(self):
+    #     # Launching the loop as long as the game is open
+    #     self.open = True
+    #     while self.open:
+    #         self.maze()
+    #         if self.hero.set_position in self.maze.weapon:
+    #             if self.hero.set_position in self.maze.in_inventory:
+    #                 pass
+    #             else:
+    #                 self.hero.random_position_weapons()
+    #         self.try_to_move()
+    #         if self.user == "q":
+    #             self.open = False
+    #         else:
+    #             self.hero.try_to_move(self.user)
+    #         if self.set_position == self.maze.exit:
+    #             self.hero.end_game()
+    #             self.open = False
 
 
 def main():
