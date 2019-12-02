@@ -31,7 +31,7 @@ class Hero (MoveablePosition):
         pos = super().__repr__()
         return f"Je suis le Hero dans la position {pos}"
 
-    # Put weapon name in inventory
+    # Put weapon in inventory
     def pick_up_weapon(self, weapon):
         self.in_inventory.add(weapon)
         weapon.x = None
@@ -39,16 +39,13 @@ class Hero (MoveablePosition):
 
     # Put positions weapons in inventory
     def in_inventory(self):
-        self.in_inventory.append(self.set_position)
+        self.inventory.append(self.set_position)
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapons in your inventory"
 
     # Get the three weapons to put the guardian to sleep and exit the maze
-    def end_game(self):
-        if len(self.inventory) == 3:
-            print("YOU WIN")
-        else:
-            print("GAME OVER")
+    def check_end_game(self):
+        return len(self.inventory) == 3
 
 
 class Weapon(Position):
