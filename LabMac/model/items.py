@@ -22,9 +22,10 @@ from .position import Position, MoveablePosition
 
 
 class Hero (MoveablePosition):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, maze, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.inventory = []
+        self.maze = maze
         self.set_position = self.maze.start
 
     def __repr__(self):
@@ -41,11 +42,15 @@ class Hero (MoveablePosition):
     def in_inventory(self):
         self.inventory.append(self.set_position)
         return "You have found a weapon"
-        return f"You have {len(self.inventory)} weapons in your inventory"
+        return f"You have {len(self.inventory)} weapon(s) in your inventory"
 
     # Get the three weapons to put the guardian to sleep and exit the maze
-    def check_end_game(self):
-        return len(self.inventory) == 3
+    # def check_end_game(self):
+    #     return len(self.inventory) == 3
+
+    # All conditions to fight with the guardian at the end
+    def fight_guardian(self):
+        return self.set_position == self.maze.exit and len(self.inventory) == 3
 
 
 class Weapon(Position):
