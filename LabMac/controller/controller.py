@@ -47,7 +47,6 @@ class Game:
             else:
                 print("YOU LOOSE")
 
-
     def loop(self):
         # Launching the loop as long as the game is open
         self.open = True
