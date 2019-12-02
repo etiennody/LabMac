@@ -27,7 +27,7 @@ class Game:
     def try_to_move(self):
         # Check requested directions
         while True:
-            self.user = input("Where do you want to move U for up , d for down, l for left, r for right or q to quit the game)?")
+            self.user = input("Where do you want to move u for up , d for down, l for left, r for right or q to quit the game)?")
             if self.user == "u":
                 self.maze.move_hero_up()
             elif self.user == "d":
@@ -38,6 +38,15 @@ class Game:
                 self.maze.move_hero_right()
             elif self.user == "q":
                 self.maze.quit()
+
+            result = self.maze.check_end_game()
+            if result is None:
+                continue
+            if result:
+                print("YOU WIN")
+            else:
+                print("YOU LOOSE")
+
 
     def loop(self):
         # Launching the loop as long as the game is open
