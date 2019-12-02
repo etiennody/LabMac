@@ -15,7 +15,7 @@ from LabMac.model.items import Hero
 
 class Game:
     def __init__(self):
-        self.maze = Maze(".LabMac/resources/map/map.txt")
+        self.maze = Maze("LabMac/resources/map/map.txt")
         self.hero = Hero(self.maze)
         self.user = None
         self.open = False
@@ -27,9 +27,7 @@ class Game:
     def try_to_move(self):
         # Check requested directions
         while True:
-            self.user = input("Where do you want to move \
-                              U for up , d dor down, l for left, r for right \
-                              or q to quit the game)?")
+            self.user = input("Where do you want to move U for up , d for down, l for left, r for right or q to quit the game)?")
             if self.user == "u":
                 self.maze.move_hero_up()
             elif self.user == "d":
@@ -63,8 +61,8 @@ class Game:
 
 def main():
     # Launch the game
-    game = Game()
-    game.loop()
+    labmac = Game()
+    labmac.loop()
 
 
 # if __name__ == "__main__":
