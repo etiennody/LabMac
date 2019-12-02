@@ -11,14 +11,14 @@ Github:
 
 import random
 
-from LabMac.constants import FLOOR_CHAR, WALLS_CHAR, START_CHAR, EXIT_CHAR
+from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
 from .position import Position
 
 
 class Maze:
     def __init__(self, filename):
         self.floor = []
-        # self.wall = []
+        # self.walls = []
         self.weapons = []
         self.hero = None
         self.guardian = None
