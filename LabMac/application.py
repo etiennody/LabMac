@@ -8,7 +8,8 @@ Author:
 Github:
     https://github.com/etiennody
 """
-from .model.game import Game
+from LabMac.model.game import Game
+from LabMac.model.maze import
 
 
 class Application:
@@ -33,8 +34,8 @@ class Application:
             if self.user == "q":
                 self.open = False
             else:
-                if self.set_position == self.maze.exit:
-                    self.hero.end_game()
+                if self.position == self.maze.exit:
+                    self.hero.fight_guardian()
                 self.open = False
 
 
