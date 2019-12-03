@@ -20,7 +20,20 @@ class Application:
         # Launch the main loop of the game
         self.open = True
         while self.open:
-            pass
+            # Launching the loop as long as the game is open
+            self.maze()
+            if self.hero.position in self.maze.weapon:
+                if self.hero.position in self.maze.in_inventory:
+                    pass
+                else:
+                    self.hero.random_position_weapons()
+            self.try_to_move()
+            if self.user == "q":
+                self.open = False
+            else:
+                if self.set_position == self.maze.exit:
+                    self.hero.end_game()
+                self.open = False
 
 
 def main():
