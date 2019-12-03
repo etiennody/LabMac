@@ -8,6 +8,7 @@ Author:
 Github:
     https://github.com/etiennody
 """
+from .model.game import Game
 
 
 class Application:
@@ -15,6 +16,7 @@ class Application:
     def __init__(self):
         # Initialize the main object
         self.open = False
+        self.game = Game()
 
     def loop(self):
         # Launch the main loop of the game
