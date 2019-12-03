@@ -10,29 +10,44 @@ Github:
 """
 
 from LabMac.model.maze import Maze
-from LabMac.model.items import Hero
 
 
-class KeyController:
-    def try_to_move(self):
-        # Check requested directions
-        while True:
-            self.user = input("Where do you want to move u for up , d for down, l for left, r for right or q to quit the game)?")
-            if self.user == "u":
+class Application:
+    # Is the game itself
+    def __init__(self):
+        # Initialize the main object
+        self.open = False
+        self.maze = Maze(filename="./LabMac/resources/map/map.txt")
+
+    def loop(self):
+        print(self.maze.hero)
+        # Launch the main loop of the game
+        self.open = True
+        while self.open:
+            command = input("Where do you want to move u for up , d for down, l for left, r for right or q to quit the game)?")
+            if command == "u":
                 self.maze.move_hero_up()
-            elif self.user == "d":
-                self.move_hero_down()
-            elif self.user == "l":
+            elif command == "d":
+                self.maze.move_hero_down()
+            elif command == "l":
                 self.maze.move_hero_left()
-            elif self.user == "r":
+            elif command == "r":
                 self.maze.move_hero_right()
-            elif self.user == "q":
-                self.maze.quit()
+            elif command == "q":
+                self.open = False
 
-            result = self.maze.fight_guardian()
-            if result is None:
-                continue
-            if result:
-                print("YOU WIN")
-            else:
-                print("YOU LOOSE")
+            print(self.maze.hero)
+
+#             result = self.maze.fight_guardian()
+#             if result is None:
+#                 continue
+#             if result:
+#                 print("YOU WIN")
+#             else:
+#                 print("YOU LOOSE")
+
+
+def main():
+    # Main entry point to play
+    application = Application()
+    application.loop()
