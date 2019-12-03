@@ -13,7 +13,7 @@ Github:
 class Position:
     # x, y : initial positions
     def __init__(self, x, y):
-        self.set_position(x, y)
+        self.position(x, y)
 
     def __repr__(self):
         return f"Position({self.x}, {self.y})"
@@ -22,19 +22,15 @@ class Position:
         return self.x == other.x and self.y == other.y
 
     def __hash__(self):
-        return hash(self.set_position)
+        return hash(self.position)
 
     # x, y : positions
-    def set_position(self, x, y):
+    def position(self, x, y):
         self.x = x
         self.y = y
 
 
 class MoveablePosition(Position):
-    # Possibles positions to Up, Down, Left and Right
-    # def __init__(self, mx, my):
-    #     self.mx = mx
-    #     self.my = my
 
     def up(self):
         self.x -= 1
