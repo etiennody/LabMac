@@ -9,16 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
-from .position import Position
-
-
-# class Floor(Position):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.content = None
-
-#     def is_empty(self):
-#         return self.content is None
+from LabMac.model.position import Position
 
 
 class Hero:
