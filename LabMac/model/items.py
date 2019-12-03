@@ -9,19 +9,22 @@ Github:
     https://github.com/etiennody
 """
 
-from LabMac.model.position import Position
+from LabMac.model.position import Position, Movement
 
 
-class Hero:
-    def __init__(self):
+class Hero(Movement):
+    def __init__(self, x, y):
         self.position = None
-        self.maze = None
         self.inventory = []
+        super().__init__(x, y)
 
-    def move(self, direction):
-        new_position = self.position + direction
-        if new_position in self.maze.floor:
-            self.position = new_position
+    # def move(self, direction):
+    #     new_position = self.position + direction
+    #     if new_position in self.maze.floor:
+    #         self.position = new_position
+
+    def __repr__(self):
+        return f"Hero({self.x}, {self.y})"
 
     # Put weapon in inventory
     def pick_up_weapon(self, weapon):
@@ -46,7 +49,7 @@ class Hero:
 
 class Weapon(Position):
     def __init__(self, name, *args, **kwargs):
-        super().__init__()
+        super().__init__(*args, **kwargs)
         self.name = name
 
 
