@@ -9,7 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
-from .position import Position, MoveablePosition
+from .position import Position
 
 
 # class Floor(Position):
@@ -26,7 +26,6 @@ class Hero:
         self.position = None
         self.maze = None
         self.inventory = []
-        # self.set_position = self.maze.start
 
     def move(self, direction):
         new_position = self.position + direction
