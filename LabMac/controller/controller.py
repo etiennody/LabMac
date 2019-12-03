@@ -20,18 +20,18 @@ class Game:
         self.user = None
         self.open = False
 
-    def quit(self):
-        # Quit the game
-        self.open = False
+    # def quit(self):
+    #     # Quit the game
+    #     self.open = False
 
-    def try_to_move(self):
+    def loop(self):
         # Check requested directions
         while True:
             self.user = input("Where do you want to move u for up , d for down, l for left, r for right or q to quit the game)?")
             if self.user == "u":
                 self.maze.move_hero_up()
             elif self.user == "d":
-                self.maze.move_hero_down()
+                self.move_hero_down()
             elif self.user == "l":
                 self.maze.move_hero_left()
             elif self.user == "r":
@@ -61,9 +61,8 @@ class Game:
     #         if self.user == "q":
     #             self.open = False
     #         else:
-    #             self.hero.try_to_move(self.user)
-    #         if self.set_position == self.maze.exit:
-    #             self.hero.end_game()
+    #             if self.set_position == self.maze.exit:
+    #                 self.hero.end_game()
     #             self.open = False
 
 
@@ -73,5 +72,5 @@ def main():
     labmac.loop()
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
