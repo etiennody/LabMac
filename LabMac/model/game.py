@@ -9,7 +9,8 @@ Github:
     https://github.com/etiennody
 """
 
-from .maze import Maze
+from LabMac.model.maze import Maze
+from LabMac.model.items import Hero
 
 
 class Game:
@@ -17,7 +18,7 @@ class Game:
     def __init__(self):
         self.maze = Maze()
         self.maze.load(".LabMac/resources/map/map.txt")
-        self.mg = None
+        self.hero = Hero()
 
 
 def main():
