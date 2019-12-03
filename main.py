@@ -9,15 +9,12 @@ Github:
     https://github.com/etiennody
 """
 
-from LabMac.controller.controller import main as LabMac_main
+from LabMac.controller.controller import main as console_main
 
 
-def main(LabMac):
-    if LabMac:
-        LabMac_main()
-    else:
-        pass
+def main():
+    return console_main()
 
 
 if __name__ == "__main__":
-    main(LabMac_main)
+    main()
