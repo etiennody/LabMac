@@ -24,7 +24,11 @@ class Application:
         # Launch the main loop of the game
         self.open = True
         while self.open:
-            command = input("Where do you want to move u for up , d for down, l for left, r for right or q to quit the game)?")
+            command = input(
+                "Where do you want to move ? \
+                u for up , d for down, l for left, r for right \
+                or q to quit the game)?"
+            )
             if command == "u":
                 self.maze.move_hero_up()
             elif command == "d":
