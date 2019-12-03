@@ -26,8 +26,8 @@ class Application:
         while self.open:
             command = input(
                 "Where do you want to move ? \
-                u for up , d for down, l for left, r for right \
-                or q to quit the game)?"
+                'u' for up , 'd' for down, 'l' for left, 'r' for right \
+                or 'q' to quit the game)?"
             )
             if command == "u":
                 self.maze.move_hero_up()
