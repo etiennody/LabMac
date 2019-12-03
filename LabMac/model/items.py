@@ -21,16 +21,17 @@ from .position import Position, MoveablePosition
 #         return self.content is None
 
 
-class Hero (MoveablePosition):
-    def __init__(self, maze, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Hero:
+    def __init__(self):
+        self.position = None
+        self.maze = None
         self.inventory = []
-        self.maze = maze
-        self.set_position = self.maze.start
+        # self.set_position = self.maze.start
 
-    def __repr__(self):
-        pos = super().__repr__()
-        return f"Je suis le Hero dans la position {pos}"
+    def move(self, direction):
+        new_position = self.position + direction
+        if new_position in self.maze.floor:
+            self.position = new_position
 
     # Put weapon in inventory
     def pick_up_weapon(self, weapon):
@@ -40,7 +41,7 @@ class Hero (MoveablePosition):
 
     # Put positions weapons in inventory
     def in_inventory(self):
-        self.inventory.append(self.set_position)
+        self.inventory.append(self.position)
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapon(s) in your inventory"
 
