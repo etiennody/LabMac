@@ -18,11 +18,16 @@ class Position:
     def __repr__(self):
         return f"Position({self.x}, {self.y})"
 
+        # Define the equality between self position and another position
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
 
     def __hash__(self):
         return hash(self.position)
+
+    # Define the addition between self position and move position
+    def __add__(self, movement):
+        return Position(self.x + movement.mx, self.y + movement.my)
 
     # x, y : positions
     def position(self, x, y):
@@ -30,16 +35,19 @@ class Position:
         self.y = y
 
 
-class MoveablePosition(Position):
+class Movement:
+    def __init__(self, mx, my):
+        self.mx = mx
+        self.my = my
 
     def up(self):
-        self.x -= 1
+        self.mx -= 1
 
     def down(self):
-        self.x += 1
+        self.mx += 1
 
     def left(self):
-        self.y -= 1
+        self.my -= 1
 
     def right(self):
-        self.y += 1
+        self.my += 1
