@@ -50,11 +50,12 @@ class Hero:
 
     # All conditions to fight with the guardian at the end
     def fight_guardian(self):
-        return self.set_position == self.maze.exit and len(self.inventory) == 3
+        return self.position == self.maze.exit and len(self.inventory) == 3
 
 
 class Weapon(Position):
     def __init__(self, name, *args, **kwargs):
+        super().__init__()
         self.name = name
 
 
