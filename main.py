@@ -9,11 +9,7 @@ Github:
     https://github.com/etiennody
 """
 
-from LabMac.controller.controller import main as console_main
-
-
-def main():
-    return console_main()
+from LabMac.controller.controller import main
 
 
 if __name__ == "__main__":
