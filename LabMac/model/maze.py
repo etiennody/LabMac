@@ -63,7 +63,7 @@ class Maze:
             for weapon in self.weapons:
                 if self.hero == weapon:
                     print("You have find a weapon!")
-                    # self.hero.pick_up_weapon()
+                    self.hero.pick_up_weapon()
 
     def move_hero_down(self):
         if self.can_move_to(self.hero.x, self.hero.y + 1):
@@ -71,7 +71,7 @@ class Maze:
             for weapon in self.weapons:
                 if self.hero == weapon:
                     print("You have find a weapon!")
-                    # self.hero.pick_up_weapon()
+                    self.hero.pick_up_weapon()
 
     def move_hero_left(self):
         if self.can_move_to(self.hero.x - 1, self.hero.y):
@@ -79,7 +79,7 @@ class Maze:
             for weapon in self.weapons:
                 if self.hero == weapon:
                     print("You have find a weapon!")
-                    # self.hero.pick_up_weapon()
+                    self.hero.pick_up_weapon()
 
     def move_hero_right(self):
         if self.can_move_to(self.hero.x + 1, self.hero.y):
@@ -87,8 +87,7 @@ class Maze:
             for weapon in self.weapons:
                 if self.hero == weapon:
                     print("You have find a weapon!")
-                    # self.hero.pick_up_weapon(weapon)
-                    # print("You have find a weapon!")
+                    self.hero.pick_up_weapon(weapon)
 
     # get random positions for weapons
     # def random_positions_weapons(self):
