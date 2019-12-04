@@ -5,7 +5,7 @@
 Project 3 - OpenClassrooms: Aidez MacGyver à s'échapper !
 Author:
     Jody Etienne
-Github:
+GitHub:
     https://github.com/etiennody
 """
 
@@ -21,13 +21,12 @@ class Application:
 
     def loop(self):
         print(self.maze.hero)
+
         # Launch the main loop of the game
         self.open = True
         while self.open:
             command = input(
-                "Where do you want to move ? \
-                'u' for up , 'd' for down, 'l' for left, 'r' for right \
-                or 'q' to quit the game)?"
+                "Where do you want to move ? 'u' for up , 'd' for down, 'l' for left, 'r' for right or 'q' to quit the game)?"
             )
             if command == "u":
                 self.maze.move_hero_up()
@@ -40,15 +39,18 @@ class Application:
             elif command == "q":
                 self.open = False
 
-            print(self.maze.hero)
+            # result = self.maze.fight_guardian()
+            # if result is None:
+            #     continue
+            # if result:
+            #     print("YOU WIN")
+            # else:
+            #     print("YOU LOOSE")
 
-#             result = self.maze.fight_guardian()
-#             if result is None:
-#                 continue
-#             if result:
-#                 print("YOU WIN")
-#             else:
-#                 print("YOU LOOSE")
+            print(self.maze.hero)
+            print(self.maze.weapons)
+            print(self.maze.hero.inventory)
+            print(self.maze.exit)
 
 
 def main():
