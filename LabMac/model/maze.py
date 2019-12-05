@@ -20,6 +20,7 @@ class Maze:
     def __init__(self, filename):
         self.floor = []
         self.walls = []
+        # self.inventory = []
         self.weapons = [Position(9, 1), Position(10, 1), Position(11, 1)]
         self.hero = None
         self.start = None
@@ -62,32 +63,43 @@ class Maze:
             self.hero.up()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("You have find a weapon!")
-                    self.hero.pick_up_weapon()
+                    print(f"YOU HAVE FIND {self.maze.hero.weapons.count(self.weapons)} WEAPON!")
+                    self.hero.pick_up_weapon(weapon)
 
     def move_hero_down(self):
         if self.can_move_to(self.hero.x, self.hero.y + 1):
             self.hero.down()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("You have find a weapon!")
-                    self.hero.pick_up_weapon()
+                    print("YOU HAVE FIND A WEAPON!")
+                    self.hero.pick_up_weapon(weapon)
 
     def move_hero_left(self):
         if self.can_move_to(self.hero.x - 1, self.hero.y):
             self.hero.left()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("You have find a weapon!")
-                    self.hero.pick_up_weapon()
+                    print("YOU HAVE FIND A WEAPON!")
+                    self.hero.pick_up_weapon(weapon)
 
     def move_hero_right(self):
         if self.can_move_to(self.hero.x + 1, self.hero.y):
             self.hero.right()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("You have find a weapon!")
+                    print(f"YOU HAVE FIND A WEAPON!")
                     self.hero.pick_up_weapon(weapon)
+
+    def is_exit_hero(self):
+        return self.hero == self.exit
+
+    # def count_inventory(self):
+    #     pass
+
+
+    # def fight_guardian(self):
+    #     return (self.hero.inventory) == len(self.weapons)
+
 
     # get random positions for weapons
     # def random_positions_weapons(self):

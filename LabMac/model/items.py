@@ -33,20 +33,7 @@ class Hero(Movement):
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapon(s) in your inventory"
 
-    # #     # # All conditions to fight with the guardian at the end
-    # def fight_guardian(self):
-    #     if self.maze.hero in self.maze.exit:
-    #         print("Je suis in exit")
-
-    # def is_exit_position(self):
-    #     return self.set_position in self.exit
-
-    #     #and len(self.inventory) == 3
-
-
-# class Guardian(Position):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
+    # All conditions to fight with the guardian at the end
 
 
 class Weapon(Position):

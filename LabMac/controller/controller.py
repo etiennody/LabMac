@@ -20,13 +20,25 @@ class Application:
         self.maze = Maze(filename="./LabMac/resources/map/map.txt")
 
     def loop(self):
-        print(self.maze.hero)
 
         # Launch the main loop of the game
         self.open = True
+
+        print("\nMacGyver is located at the entry of the maze in :")
+        print(f"Position({self.maze.hero.x}, {self.maze.hero.y})")
+
         while self.open:
+            print("\nUpdate MacGyver position :")
+            print(f"Position({self.maze.hero.x}, {self.maze.hero.y})")
+            # print(self.maze.weapons)
+            # print(self.maze.hero.inventory)
+            print("\nWeapons position on maze : ")
+            print(f"{self.maze.weapons}")
+            print(f"\nExit position :")
+            print(self.maze.exit)
+
             command = input(
-                "Where do you want to move ? 'u' for up , 'd' for down, 'l' for left, 'r' for right or 'q' to quit the game)?"
+                "\nWhere do you want to move ? 'u' for up , 'd' for down, 'l' for left, 'r' for right or 'q' to quit the game)?"
             )
             if command == "u":
                 self.maze.move_hero_up()
@@ -39,6 +51,11 @@ class Application:
             elif command == "q":
                 self.open = False
 
+            if self.maze.is_exit_hero():
+                print(f"YOU HAVE FIND THE EXIT")
+                print(f"-----YOU WIN !!-----")
+                self.open = False
+
             # result = self.maze.fight_guardian()
             # if result is None:
             #     continue
@@ -46,11 +63,6 @@ class Application:
             #     print("YOU WIN")
             # else:
             #     print("YOU LOOSE")
-
-            print(self.maze.hero)
-            print(self.maze.weapons)
-            print(self.maze.hero.inventory)
-            print(self.maze.exit)
 
 
 def main():
