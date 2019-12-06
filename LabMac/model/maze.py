@@ -62,7 +62,7 @@ class Maze:
             self.hero.up()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print(f"YOU HAVE FIND A WEAPON!")
+                    print("YOU HAVE FIND A WEAPON!")
                     self.hero.pick_up_weapon(weapon)
 
     def move_hero_down(self):
@@ -86,7 +86,7 @@ class Maze:
             self.hero.right()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print(f"YOU HAVE FIND A WEAPON!")
+                    print("YOU HAVE FIND A WEAPON!")
                     self.hero.pick_up_weapon(weapon)
 
     # def is_exit_hero(self):
@@ -99,9 +99,9 @@ class Maze:
     def fight_guardian(self):
         if self.hero == self.exit:
             if len(self.hero.inventory) == len(self.weapons):
-                return "**** YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN ****"
+                return "\n***** YOU WIN!! YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN *****"
             else:
-                return "\__GAME OVER__/"
+                return "\n*****__GAME OVER__*****"
         else:
             return False
 
