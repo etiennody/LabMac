@@ -9,25 +9,25 @@ GitHub:
     https://github.com/etiennody
 """
 
-# import random
+import random
 
 from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
 from LabMac.model.position import Position
-from LabMac.model.items import Hero#, Weapon
+from LabMac.model.items import Hero, Weapon
 
 
 class Maze:
     def __init__(self, filename):
         self.floor = []
         self.walls = []
-        self.weapons = [Position(9, 1), Position(10, 1), Position(12, 2)]
+        self.weapons = []
         self.hero = None
         self.start = None
         self.exit = None
         self.width = None
         self.height = None
         self.load(filename)
-        # self.random_positions_weapons()
+        self.random_positions_weapons()
 
     def __contains__(self, set_position):
         return set_position in self.floor
@@ -105,12 +105,12 @@ class Maze:
         else:
             return False
 
-    # get random positions for weapons
-    # def random_positions_weapons(self):
-    #     positions = random.sample(
-    #         set(self.floor) - {self.start, self.exit}, 3)
-    #     weapon_names = ["ether", "pipe", "needle"]
-    #     for position in positions:
-    #         self.weapons.append(
-    #             Weapon(x=position.x, y=position.y, name=weapon_names.pop())
-    #         )
+    # Get random positions for weapons
+    def random_positions_weapons(self):
+        positions = random.sample(
+            set(self.floor) - {self.start, self.exit}, 3)
+        weapon_names = ["ether", "pipe", "needle"]
+        for position in positions:
+            self.weapons.append(
+                Weapon(x=position.x, y=position.y, name=weapon_names.pop())
+            )
