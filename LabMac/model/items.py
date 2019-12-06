@@ -33,8 +33,6 @@ class Hero(Movement):
         return "You have found a weapon"
         return f"You have {len(self.inventory)} weapon(s) in your inventory"
 
-    # All conditions to fight with the guardian at the end
-
 
 class Weapon(Position):
     def __init__(self, name, *args, **kwargs):

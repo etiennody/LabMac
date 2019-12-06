@@ -30,8 +30,6 @@ class Application:
         while self.open:
             print("\nUpdate MacGyver position :")
             print(f"Position({self.maze.hero.x}, {self.maze.hero.y})")
-            # print(self.maze.weapons)
-            # print(self.maze.hero.inventory)
             print("\nWeapons position on maze : ")
             print(f"{self.maze.weapons}")
             print(f"\nExit position :")
@@ -50,19 +48,27 @@ class Application:
                 self.maze.move_hero_right()
             elif command == "q":
                 self.open = False
+            else:
+                print("Choose another direction!")
 
-            if self.maze.is_exit_hero():
-                print(f"YOU HAVE FIND THE EXIT")
-                print(f"-----YOU WIN !!-----")
+            # if self.maze.is_exit_hero():
+            #     if self.maze.count_inventory():
+            #         print(
+            #             "* YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN *")
+            #         print("-----YOU WIN !!-----")
+            #         self.open = False
+
+            result = self.maze.fight_guardian()
+            if result:
+                print(result)
                 self.open = False
-
-            # result = self.maze.fight_guardian()
             # if result is None:
             #     continue
             # if result:
             #     print("YOU WIN")
             # else:
             #     print("YOU LOOSE")
+            #     self.open = False
 
 
 def main():

@@ -20,8 +20,7 @@ class Maze:
     def __init__(self, filename):
         self.floor = []
         self.walls = []
-        # self.inventory = []
-        self.weapons = [Position(9, 1), Position(10, 1), Position(11, 1)]
+        self.weapons = [Position(9, 1), Position(10, 1), Position(12, 2)]
         self.hero = None
         self.start = None
         self.exit = None
@@ -63,7 +62,7 @@ class Maze:
             self.hero.up()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print(f"YOU HAVE FIND {self.maze.hero.weapons.count(self.weapons)} WEAPON!")
+                    print(f"YOU HAVE FIND A WEAPON!")
                     self.hero.pick_up_weapon(weapon)
 
     def move_hero_down(self):
@@ -90,16 +89,21 @@ class Maze:
                     print(f"YOU HAVE FIND A WEAPON!")
                     self.hero.pick_up_weapon(weapon)
 
-    def is_exit_hero(self):
-        return self.hero == self.exit
+    # def is_exit_hero(self):
+    #     return self.hero == self.exit
 
     # def count_inventory(self):
-    #     pass
+    #     return len(self.hero.inventory) == len(self.weapons)
 
-
-    # def fight_guardian(self):
-    #     return (self.hero.inventory) == len(self.weapons)
-
+    # All conditions to fight with the guardian at the end
+    def fight_guardian(self):
+        if self.hero == self.exit:
+            if len(self.hero.inventory) == len(self.weapons):
+                return "**** YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN ****"
+            else:
+                return "\__GAME OVER__/"
+        else:
+            return False
 
     # get random positions for weapons
     # def random_positions_weapons(self):
