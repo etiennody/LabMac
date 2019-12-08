@@ -11,9 +11,10 @@ GitHub:
 
 import random
 
-from LabMac.constants import LabPygame, FLOOR_CHAR, START_CHAR, EXIT_CHAR
+from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
 from LabMac.model.position import Position
 from LabMac.model.items import Hero, Weapon
+from Labmac.views import LabPygame
 
 
 class Maze:

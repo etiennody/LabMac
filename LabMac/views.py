@@ -12,6 +12,8 @@ import os
 import pygame
 
 from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS
+from LabMac.model.items import Maze
+from LabMac.model.items import Hero
 
 
 class LabPygame:
@@ -41,3 +43,22 @@ class LabPygame:
                 colorkey = image.get_at((0, 0))
             image.set_colorkey(colorkey)
         return image
+
+
+class MazeView:
+
+    def __init__(self):
+        pass
+
+
+class HeroView:
+
+    def __init__(self):
+        self.hero_img = self.maze.hero.load_image("macgyver.png", -1)
+        self.hero_render = pygame.transform.scale(self.hero_img, (30, 30))
+
+
+class ItemsView:
+
+    def __init__(self):
+        pass
