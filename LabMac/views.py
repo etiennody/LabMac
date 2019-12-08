@@ -48,7 +48,14 @@ class LabPygame:
 class MazeView:
 
     def __init__(self):
-        pass
+        self.map_render = pygame.Surface(self.maze.labpygame_object.screen.get_size()).convert()
+        self.map_render.fill((25, 25, 25))
+
+        self.wall_img = self.maze.wall.load_image("wall.png", -1)
+        self.wall_render = pygame.transform.scale(self.wall_img, (32, 32))
+
+        self.floor_img = self.maze.floor.load_image("floor.png", -1)
+        self.floor_render = pygame.transform.scale(self.floor_img, (32, 32))
 
 
 class HeroView:
