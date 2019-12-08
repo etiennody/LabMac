@@ -10,26 +10,28 @@ GitHub:
 """
 import pygame
 
-from LabMac import constants
+from LabMac.constants import LabPygame, BACKGROUND_COLOR
 from LabMac.model.maze import Maze
 
 
 class Application:
     # Is the game itself
-    def __init__(self):
+    def __init__(self, labpygame_object: LabPygame = None):
         # Initialize the main object
         self.open = False
-        self.maze = Maze(constants.MAP)
+        self.labpygame = labpygame_object
+        self.gameplay = Maze(self.labpygame)
+        self.gameplay.load("./Labmac/resources/map/map.text")
 
     def loop(self):
 
-        # Initialize Pygame
-        pygame.init()
-
         # Launch the main loop of the game
         self.open = True
+        # Initialize Pygame
 
         while self.open:
+
+            self.labpygame.window_surface.fill(BACKGROUND_COLOR)
 
             command = input(
                 "\nWhere do you want to move ? 'u' for up , 'd' for down, 'l' for left, 'r' for right or 'q' to quit the game)?"
@@ -43,14 +45,14 @@ class Application:
             elif command == "r":
                 self.maze.move_hero_right()
             elif command == "q":
-                self.open = False
+                pygame.display.flip()
             else:
                 print("Choose another direction!")
 
             result = self.maze.fight_guardian()
             if result:
                 print(result)
-                self.open = False
+                pygame.display.flip()
 
 
 def main():
