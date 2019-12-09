@@ -11,7 +11,7 @@ GitHub:
 import pygame
 
 # from LabMac.constants import BACKGROUND_COLOR
-from LabMac.views import LabPygame, MazeView
+from LabMac.views import LabPygame#, MazeView
 from LabMac.model.maze import Maze
 from LabMac.constants import MAP
 
@@ -23,7 +23,7 @@ class Application:
         self.open = False
         self.labpygame = LabPygame()
         self.maze = Maze(MAP)
-        self.maze_view = MazeView(self.maze)
+        # self.maze_view = MazeView(self.maze)
 
     def loop(self):
 
@@ -32,7 +32,7 @@ class Application:
 
         while self.open:
 
-            self.labpygame.window_surface.blit(self.views.map_render, (0, 0))
+            self.labpygame.window_surface.blit(self.map_render, (0, 0))
 
             # Listen events
             for event in pygame.event.get():
