@@ -34,11 +34,13 @@ class Application:
 
             self.labpygame.window_surface.blit(self.views.map_render, (0, 0))
 
+            # Listen events
             for event in pygame.event.get():
-                if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT:
+                if event.type == pygame.QUIT:
                     self.open = False
 
                 elif event.type == pygame.KEYDOWN:
+                    # Change the direction according to the keyboard event
                     if event.key == pygame.K_UP:
                         self.maze.move_hero_up()
                     elif event.key == pygame.K_DOWN:
@@ -47,22 +49,6 @@ class Application:
                         self.maze.move_hero_left()
                     elif event.key == pygame.K_RIGHT:
                         self.maze.move_hero_right()
-
-            # command = input(
-            #     "\nWhere do you want to move ? 'u' for up , 'd' for down, 'l' for left, 'r' for right or 'q' to quit the game)?"
-            # )
-            # if command == "u":
-            #     self.maze.move_hero_up()
-            # elif command == "d":
-            #     self.maze.move_hero_down()
-            # elif command == "l":
-            #     self.maze.move_hero_left()
-            # elif command == "r":
-            #     self.maze.move_hero_right()
-            # elif command == "q":
-            #     pygame.display.flip()
-            # else:
-            #     print("Choose another direction!")
 
             # result = self.maze.fight_guardian()
             # if result:
