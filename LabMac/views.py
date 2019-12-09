@@ -24,7 +24,7 @@ class LabPygame:
 
     def load_image(self, name, colorkey=None):
 
-        fullpath = os.path.join('.LabMac/resources/images', name)
+        fullpath = os.path.join('/LabMac/resources/images', name)
 
         try:
             image = pygame.image.load(fullpath)
