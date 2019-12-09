@@ -10,6 +10,7 @@ Github:
 """
 import os
 import pygame
+from pygame.compat import geterror
 
 from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, WALL, FLOOR, NEEDLE, ETHER, PIPE, GUARDIAN, SPRITE_SIZE
 
@@ -22,6 +23,7 @@ class LabPygame:
         self.window_surface = pygame.display.set_mode((width, height))
         pygame.display.set_caption("LabMac - Help MacGyver !")
 
+    # Load images from the local LabMac/resources/images directory
     def load_image(self, name, colorkey=None):
 
         fullpath = os.path.join('/LabMac/resources/images', name)
@@ -34,8 +36,9 @@ class LabPygame:
                 image = image.get_alpha()
         except pygame.error:
             print("Cannot load image", name)
-            raise SystemExit
+            raise SystemExit(str(geterror()))
 
+        # Set transparency
         if colorkey is not None:
             if colorkey == -1:
                 colorkey = image.get_at((0, 0))
