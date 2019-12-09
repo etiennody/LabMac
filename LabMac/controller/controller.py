@@ -32,8 +32,10 @@ class Application:
 
         while self.open:
 
+            # Initialyze, create and display window
             self.labpygame.window_surface.blit(self.maze_view.maze_render, (0, 0))
 
+            # Add differents elements: walls, floor, weapons, start, exit
             self.maze_view.display_elements(self.window_surface)
 
             # Listen events
@@ -65,8 +67,10 @@ def main():
     application = Application()
     application.loop()
 
-########## CONSOLE VERSION ##########
-"""class Application:
+
+"""
+######### CONSOLE VERSION ##########
+class Application:
     # Is the game itself
     def __init__(self):
         # Initialize the main object
@@ -114,4 +118,5 @@ def main():
 def main():
     # Main entry point to play
     application = Application()
-    application.loop()"""
+    application.loop()
+"""
