@@ -72,7 +72,7 @@ class MazeView(LabPygame):
         # self.pipe_render = pygame.transform.scale(self.needle_img, (30, 30))
 
     def display_elements(self, window_surface):
-        for pos in self.maze.walls:
+        for pos in self.walls:
             self.window_surface.blit(self.wall_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
         for pos in self.floor:
             self.window_surface.blit(self.floor_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
