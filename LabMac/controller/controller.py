@@ -23,7 +23,6 @@ class Application:
         self.open = False
         self.labpygame = LabPygame()
         self.maze = Maze(MAP)
-        # self.maze_view = MazeView(self.maze)
 
     def loop(self):
 
