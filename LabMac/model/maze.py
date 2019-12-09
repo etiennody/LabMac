@@ -14,12 +14,12 @@ import random
 from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
 from LabMac.model.position import Position
 from LabMac.model.items import Hero, Weapon
-from Labmac.views import LabPygame
+from LabMac.views import MazeView
 
 
-class Maze:
-    def __init__(self, filename, labpygame_object: LabPygame = None):
-        self.labpygame_object = labpygame_object
+class Maze(MazeView):
+    def __init__(self, filename, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.floor = []
         self.walls = []
         self.weapons = []
@@ -39,7 +39,7 @@ class Maze:
         with open(filename) as f:
             map = f.readlines()
             for lin, line in enumerate(map):
-                for char, character in enumerate(line.strip()):
+                for char, character in enumerate(line):
                     position = Position(char, lin)
                     if character == START_CHAR:
                         self.start = position
