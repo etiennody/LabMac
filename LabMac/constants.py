@@ -28,10 +28,10 @@ FPS = 60
 
 # Images
 MAP = os.path.join('LabMac', 'resources', 'map', 'map.txt')
-HERO = 'macgyver.png'
-GUARDIAN = 'guardian.png'
-WALL = 'wall.png'
-FLOOR = 'floor.png'
-ETHER = 'ether.png'
-NEEDLE = 'needle.png'
-PIPE = 'pipe.png'
+HERO = "macgyver.png"
+GUARDIAN = "guardian.png"
+WALL = "wall.png"
+FLOOR = "floor.png"
+ETHER = "ether.png"
+NEEDLE = "needle.png"
+PIPE = "pipe.png"
