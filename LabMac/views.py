@@ -12,7 +12,6 @@ import os
 import pygame
 
 from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, WALL, FLOOR, NEEDLE, ETHER, PIPE, GUARDIAN, SPRITE_SIZE
-from LabMac.maze import Maze
 
 
 class LabPygame:
@@ -25,7 +24,7 @@ class LabPygame:
 
     def load_image(self, name, colorkey=None):
 
-        fullpath = os.path.join('LabMac', 'resources', 'images', name)
+        fullpath = os.path.join('.LabMac/resources/images', name)
 
         try:
             image = pygame.image.load(fullpath)
@@ -38,18 +37,18 @@ class LabPygame:
             raise SystemExit
 
         if colorkey is not None:
-            if colorkey is -1:
+            if colorkey == -1:
                 colorkey = image.get_at((0, 0))
             image.set_colorkey(colorkey)
         return image
 
 
-class MazeView(Maze, LabPygame):
+class MazeView(LabPygame):
 
-    def __init__(self):
-        super().__init__()
-        self.map_render = pygame.Surface(self.maze.screen.get_size()).convert()
-        self.map_render.fill((25, 25, 25))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.maze_render = pygame.Surface(self.window_surface.get_size()).convert()
+        self.maze_render.fill((25, 25, 25))
 
         self.wall_img = self.load_image(WALL, -1)
         self.wall_render = pygame.transform.scale(self.wall_img, (32, 32))
@@ -84,14 +83,10 @@ class MazeView(Maze, LabPygame):
         window_surface.blit(self.guardian_render, (self.exit.y * SPRITE_SIZE, self.exit.x * SPRITE_SIZE))
 
 
-class HeroView:
+class HeroView(pygame.sprite.Sprite):
 
     def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
         self.hero_img = self.load_image("macgyver.png", -1)
         self.hero_render = pygame.transform.scale(self.hero_img, (30, 30))
-
-
-class ItemsView:
-
-    def __init__(self):
-        pass
+        self.rect = self.hero_render.get_rect()
