@@ -1,2 +1,2 @@
 flake8==3.7.9
-pygame==2.0.0.dev7
+pygame==2.0.0.dev6
