@@ -13,7 +13,6 @@ import pygame
 # from LabMac.constants import BACKGROUND_COLOR
 from LabMac.views import LabPygame, MazeView
 from LabMac.model.maze import Maze
-from LabMac.constants import MAP
 
 
 class Application:
@@ -22,8 +21,8 @@ class Application:
         # Initialize the main object
         self.open = False
         self.labpygame = LabPygame()
-        self.maze = Maze(MAP)
-        self.maze_view = MazeView()
+        self.maze = Maze("./LabMac/resources/map/map.txt")
+        self.maze_view = MazeView(maze=self.maze)
 
     def loop(self):
 
@@ -36,28 +35,49 @@ class Application:
             self.labpygame.window_surface.blit(self.maze_view.maze_render, (0, 0))
 
             # Add differents elements: walls, floor, weapons, start, exit
-            self.maze_view.display_elements(self.window_surface)
+            # self.maze.maze_view.display_elements(self.window_surface)
 
             # Listen events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.open = False
 
-                elif event.type == pygame.KEYDOWN:
-                    # Change the direction according to the keyboard event
-                    if event.key == pygame.K_UP:
-                        self.maze.move_hero_up()
-                    elif event.key == pygame.K_DOWN:
-                        self.maze.move_hero_down()
-                    elif event.key == pygame.K_LEFT:
-                        self.maze.move_hero_left()
-                    elif event.key == pygame.K_RIGHT:
-                        self.maze.move_hero_right()
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_UP] != 0:
+                self.maze.move_hero_up()
+            if keys[pygame.K_DOWN] != 0:
+                self.maze.move_hero_down()
+            if keys[pygame.K_LEFT] != 0:
+                self.maze.move_hero_left()
+            if keys[pygame.K_RIGHT] != 0:
+                self.maze.move_hero_right()
+                # Change the direction according to the keyboard event
+                # elif event.key == pygame.K_UP:
+                #     self.maze.move_hero_up()
+                # elif event.key == pygame.K_DOWN:
+                #     self.maze.move_hero_down()
+                # elif event.key == pygame.K_LEFT:
+                #     self.maze.move_hero_left()
+                # elif event.key == pygame.K_RIGHT:
+                #     self.maze.move_hero_right()
 
             # result = self.maze.fight_guardian()
-            # if result:
+            # if result is None:
+            # continue
             #     print(result)
             #     pygame.display.flip()
+
+           #  result = self.maze.fight_guardian()  # None, True, False
+
+           # if result is None:
+           #     continue
+
+           # if result:
+           #     self.maze_view.display_win()
+           #     return
+           # else result:
+           #     self.maze_view.display_game_over()
+           #     return
 
         pygame.display.flip()
 

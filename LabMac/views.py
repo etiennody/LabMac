@@ -11,15 +11,16 @@ Github:
 import os
 import pygame
 
-from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, WALL, FLOOR, NEEDLE, ETHER, PIPE, GUARDIAN, SPRITE_SIZE
+from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS#, WALL, FLOOR, NEEDLE, ETHER, PIPE, GUARDIAN, SPRITE_SIZE
+from LabMac.model.maze import Maze
 
 
 class LabPygame:
 
-    def __init__(self, width=WINDOW_WIDTH, height=WINDOW_HEIGHT):
+    def __init__(self):
         pygame.init()
         pygame.time.Clock().tick(FPS)
-        self.window_surface = pygame.display.set_mode((width, height))
+        self.window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption("LabMac - Help MacGyver !")
 
     # Load images from the local LabMac/resources/images directory
@@ -47,13 +48,15 @@ class LabPygame:
 
 class MazeView(LabPygame):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, maze, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.maze_render = pygame.Surface(self.window_surface.get_size()).convert()
-        self.maze_render.fill((25, 25, 25))
-        self.display_elements()
+        self.maze = maze
 
-        # self.wall_img = self.load_image(WALL, -1)
+        self.maze_render = pygame.Surface(self.window_surface.get_size()).convert()
+        self.maze_render.fill((153, 153, 255))
+        # self.display_elements()
+
+        # self.wall_img = self.maze.load_image(WALL, -1)
         # self.wall_render = pygame.transform.scale(self.wall_img, (32, 32))
 
         # self.floor_img = self.load_image(FLOOR, -1)
@@ -71,19 +74,19 @@ class MazeView(LabPygame):
         # self.pipe_img = self.load_image(PIPE, -1)
         # self.pipe_render = pygame.transform.scale(self.needle_img, (30, 30))
 
-    def display_elements(self, window_surface):
-        for pos in self.walls:
-            self.window_surface.blit(self.wall_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
-        for pos in self.floor:
-            self.window_surface.blit(self.floor_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
-        for weap, pos in enumerate(self.weapons):
-            if weap == 0:
-                self.window_surface.blit(self.needle_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
-            elif weap == 1:
-                self.window_surface.blit(self.ether_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
-            elif weap == 2:
-                self.window_surface.blit(self.pipe_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
-        self.window_surface.blit(self.guardian_render, (self.exit.y * SPRITE_SIZE, self.exit.x * SPRITE_SIZE))
+    # def display_elements(self, window_surface):
+    #     for pos in self.walls:
+    #         self.window_surface.blit(self.wall_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+    #     for pos in self.floor:
+    #         self.window_surface.blit(self.floor_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+    #     for weap, pos in enumerate(self.weapons):
+    #         if weap == 0:
+    #             self.window_surface.blit(self.needle_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+    #         elif weap == 1:
+    #             self.window_surface.blit(self.ether_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+    #         elif weap == 2:
+    #             self.window_surface.blit(self.pipe_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+    #     self.window_surface.blit(self.guardian_render, (self.exit.y * SPRITE_SIZE, self.exit.x * SPRITE_SIZE))
 
 
 class HeroView(pygame.sprite.Sprite):

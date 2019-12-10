@@ -14,12 +14,10 @@ import random
 from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
 from LabMac.model.position import Position
 from LabMac.model.items import Hero, Weapon
-from LabMac.views import MazeView
 
 
-class Maze(MazeView):
-    def __init__(self, filename, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Maze:
+    def __init__(self, filename):
         self.floor = []
         self.walls = []
         self.weapons = []
