@@ -9,15 +9,17 @@ GitHub:
     https://github.com/etiennody
 """
 
+import pygame
 import random
 
-from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
+from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR, WALL, FLOOR, SPRITE_SIZE
 from LabMac.model.position import Position
-from LabMac.model.items import Hero, Weapon
+from LabMac.model.items import Weapon#, Hero
 
 
-class Maze:
+class Maze(pygame.sprite.Sprite):
     def __init__(self, filename):
+        pygame.sprite.Sprite.__init__(self)
         self.floor = []
         self.walls = []
         self.weapons = []
@@ -114,3 +116,10 @@ class Maze:
             self.weapons.append(
                 Weapon(x=position.x, y=position.y, name=weapon_names.pop())
             )
+
+    def display_elements(self, screen):
+        while True:
+            for pos in self.walls:
+                screen.blit(pygame.image.load(WALL), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+            for pos in self.floor:
+                screen.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
