@@ -18,10 +18,10 @@ FLOOR_CHAR = "0"
 WALL_CHAR = "x"
 
 # Initialize window
-WINDOW_WIDTH = 640
+WINDOW_WIDTH = 480
 WINDOW_HEIGHT = 480
 BACKGROUND = os.path.join('LabMac', 'resources', 'images', 'background.png')
-SPRITE_SIZE = 30
+SPRITE_SIZE = 32
 
 # Frame rate
 FPS = 30
