@@ -13,8 +13,8 @@ import pygame
 from pygame.locals import *
 
 from LabMac.model.maze import Maze
-from LabMac.views import LabPygame, MazeView#, HeroView
-from LabMac.constants import BACKGROUND, FPS#, WINDOW_WIDTH, WINDOW_HEIGHT, HERO, SPRITE_SIZE
+from LabMac.views import LabPygame, MazeView
+from LabMac.constants import BACKGROUND, FPS, WINDOW_WIDTH, WINDOW_HEIGHT#, HERO, SPRITE_SIZE
 
 
 class Application:
@@ -24,15 +24,22 @@ class Application:
         self.open = False
         self.labpygame = LabPygame()
         self.maze = Maze("./LabMac/resources/map/map.txt")
-        self.maze_view = MazeView(self.labpygame)
+        self.maze_view = MazeView(maze=self.maze)
+        self.window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.background = pygame.image.load(BACKGROUND)
 
     def loop(self):
         """Initialyze the game"""
         self.labpygame.interface(mode='game_start')
+
+        """ICreate a background"""
         self.labpygame.window_surface.blit(self.background, [0, 0])
 
-        self.maze_view.display_elements(self.labpygame.window_surface)
+        """Dislay elements of the game)"""
+        self.maze_view.display_elements(self.maze)
+
+        # # Initialize the background music
+        # self.labpygame.play_music_background()
 
         self.open = True
 
@@ -55,6 +62,12 @@ class Application:
                 self.maze.move_hero_left()
             if keys[pygame.K_RIGHT] != 0:
                 self.maze.move_hero_right()
+
+            # self.hero.pick_up_weapon()
+
+            # self.hero.fight_guarrdian()
+
+            # self.maze_view.update()
 
             # Initialize Pygame
             # pygame.init()
