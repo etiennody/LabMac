@@ -78,8 +78,8 @@ class LabPygame(pygame.sprite.Sprite):
             clock = pygame.time.Clock()
             while True:
                 self.window_surface.fill((41, 36, 33))
-                button_1 = self.button(self.window_surface, (220, 150), 'RESTART')
-                button_2 = self.button(self.window_surface, (220, 250), 'QUIT')
+                button_1 = self.button(self.window_surface, (150, 150), 'RESTART')
+                button_2 = self.button(self.window_surface, (150, 250), 'QUIT')
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
