@@ -12,7 +12,7 @@ Github:
 import sys
 import pygame
 
-from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, HERO, SPRITE_SIZE, WALL, FLOOR#, HERO, BGM, NEEDLE, ETHER, PIPE, GUARDIAN
+from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, HERO, SPRITE_SIZE, WALL, FLOOR, BGM#, HERO, BGM, NEEDLE, ETHER, PIPE, GUARDIAN
 
 
 class LabPygame(pygame.sprite.Sprite):
@@ -29,30 +29,6 @@ class LabPygame(pygame.sprite.Sprite):
         # pygame.mixer.init()
         # pygame.mixer.music.load(BGM)
         # pygame.mixer.music.play(-1, 0.0)
-
-    # # Load images from the local LabMac/resources/images directory
-    # def load_image(self, name, colorkey=None):
-
-    #     fullpath = os.path.join("./LabMac/resources/images/", name)
-
-    #     try:
-    #         image = pygame.image.load(fullpath)
-    #         if image.get_alpha() is None:
-    #             image = image.convert()
-    #         else:
-    #             image = image.get_alpha()
-    #     except pygame.error:
-    #         print("Cannot load image: ", fullpath)
-    #         raise SystemExit
-
-    #     # Set transparency
-    #     if colorkey is not None:
-    #         if colorkey == -1:
-    #             colorkey = image.get_at((0, 0))
-
-    #         image.set_colorkey(colorkey, pygame.RLEACCEL)
-
-    #     return image
 
     def show_text(self, window_surface, font, text, color, position):
         """Show the text on screen"""
@@ -119,6 +95,13 @@ class LabPygame(pygame.sprite.Sprite):
         else:
             raise ValueError('Interface.mode unsupport <%s>...' % mode)
 
+        # def play_music_background(self):
+        #     '''Launch the game music background'''
+        #     pygame.mixer.init()
+        #     pygame.mixer.music.load(BGM)
+        #     pygame.mixer.music.play(-1)
+        #     pygame.mixer.music.set_volume(0.2)
+
 
 class MazeView(pygame.sprite.Sprite):
     def __init__(self, maze):
@@ -130,14 +113,16 @@ class MazeView(pygame.sprite.Sprite):
         self.hero = None
         self.start = None
         self.exit = None
+        self.width = None
+        self.height = None
 
-    def display_elements(self, window_surface):
+    def display_elements(self, screen):
         clock = pygame.time.Clock()
         while True:
             for pos in self.walls:
-                self.window_surface.blit(pygame.image.load(WALL), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+                screen.blit(pygame.image.load(WALL), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
             for pos in self.floor:
-                self.window_surface.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+                screen.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
             # for weap, pos in enumerate(self.weapons):
             #     if weap == 0:
             #         self.window_surface.blit(self.needle_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
