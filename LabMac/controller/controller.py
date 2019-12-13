@@ -8,40 +8,44 @@ Author:
 GitHub:
     https://github.com/etiennody
 """
-import pygame
 
-# from LabMac.constants import BACKGROUND_COLOR
-from LabMac.views import LabPygame, MazeView
+import pygame
+from pygame.locals import *
+
 from LabMac.model.maze import Maze
+from LabMac.views import LabPygame, MazeView#, HeroView
+from LabMac.constants import BACKGROUND, FPS#, WINDOW_WIDTH, WINDOW_HEIGHT, HERO, SPRITE_SIZE
 
 
 class Application:
-    # Is the game itself
+    """Is the game itself"""
     def __init__(self):
-        # Initialize the main object
+        """Initialize the main object"""
         self.open = False
         self.labpygame = LabPygame()
         self.maze = Maze("./LabMac/resources/map/map.txt")
-        self.maze_view = MazeView(maze=self.maze)
+        self.maze_view = MazeView(self.labpygame)
+        self.background = pygame.image.load(BACKGROUND)
 
     def loop(self):
+        """Initialyze the game"""
+        self.labpygame.interface(mode='game_start')
+        self.labpygame.window_surface.blit(self.background, [0, 0])
 
-        # Launch the main loop of the game
+        self.maze_view.display_elements(self.labpygame.window_surface)
+
         self.open = True
 
+        """Launch the main loop of the game"""
         while self.open:
+            pygame.time.Clock().tick(FPS)
 
-            # Initialyze, create and display window
-            self.labpygame.window_surface.blit(self.maze_view.maze_render, (0, 0))
-
-            # Add differents elements: walls, floor, weapons, start, exit
-            # self.maze.maze_view.display_elements(self.window_surface)
-
-            # Listen events
+            """Listen events"""
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.open = False
 
+            """Change the direction according to the keyboard event"""
             keys = pygame.key.get_pressed()
             if keys[pygame.K_UP] != 0:
                 self.maze.move_hero_up()
@@ -51,15 +55,23 @@ class Application:
                 self.maze.move_hero_left()
             if keys[pygame.K_RIGHT] != 0:
                 self.maze.move_hero_right()
-                # Change the direction according to the keyboard event
-                # elif event.key == pygame.K_UP:
-                #     self.maze.move_hero_up()
-                # elif event.key == pygame.K_DOWN:
-                #     self.maze.move_hero_down()
-                # elif event.key == pygame.K_LEFT:
-                #     self.maze.move_hero_left()
-                # elif event.key == pygame.K_RIGHT:
-                #     self.maze.move_hero_right()
+
+            # Initialize Pygame
+            # pygame.init()
+
+            # Initialyze, create and display window
+            # self.labpygame.window_surface.blit(self.maze_view.maze_render, (0, 0))
+
+            # self.labpygame.window_surface.blit(self.maze_view.wall_render, (self.maze.walls.set_position.x, self.maze.set_position.y))
+
+            # self.labpygame.window_surface.blit(self.hero_view.hero_render, (self.maze.hero.x * 32, self.maze.hero.x * 32))
+
+            # for item in self.maze:
+            #     self.elements_view = MazeView(self.maze, self.labpygame, self.maze_view)
+            # self.labpygame.window_surface.blit(self.elements_view, (self.maze.set_position.x, self.maze.set_position.y))
+
+            # Add differents elements: walls, floor, weapons, start, exit
+            # self.maze_view.display_elements(self.window_surface)
 
             # result = self.maze.fight_guardian()
             # if result is None:
@@ -67,23 +79,23 @@ class Application:
             #     print(result)
             #     pygame.display.flip()
 
-           #  result = self.maze.fight_guardian()  # None, True, False
+        # result = self.maze.fight_guardian() # None, True, False
 
-           # if result is None:
-           #     continue
+        # if result is None:
+        #     continue
 
-           # if result:
-           #     self.maze_view.display_win()
-           #     return
-           # else result:
-           #     self.maze_view.display_game_over()
-           #     return
+        # if result:
+        #     self.maze_view.display_win()
+        #     return
+        # else result:
+        #     self.maze_view.display_game_over()
+        #     return
 
-        pygame.display.flip()
+        self.labpygame.interface(mode='game_end')
 
 
 def main():
-    # Main entry point to play
+    """Main entry point to play"""
     application = Application()
     application.loop()
 
