@@ -42,7 +42,7 @@ class Maze:
                     if character == START_CHAR:
                         self.start = position
                         self.floor.append(position)
-                        self.hero = Hero(x=char, y=lin)
+                        # self.hero = Hero(x=char, y=lin)
                     elif character == EXIT_CHAR:
                         self.exit = position
                         self.floor.append(position)
