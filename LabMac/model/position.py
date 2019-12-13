@@ -8,6 +8,7 @@ Author:
 Github:
     https://github.com/etiennody
 """
+from LabMac.constants import SPRITE_SIZE
 
 
 class Position:
@@ -29,6 +30,16 @@ class Position:
     # Define the addition between self position and move position
     def __add__(self, movement):
         return Position(self.x + movement.mx, self.y + movement.my)
+
+    @property
+    def x_pixel(self):
+        '''Property that calculates the pixel position'''
+        return self.x * SPRITE_SIZE
+
+    @property
+    def y_pixel(self):
+        '''Property that calculates the pixel position'''
+        return self.y * SPRITE_SIZE
 
     # x, y : positions
     def set_position(self, x, y):
