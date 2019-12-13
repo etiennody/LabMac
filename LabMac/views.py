@@ -54,13 +54,13 @@ class LabPygame(pygame.sprite.Sprite):
 
     def interface(self, mode='game_start'):
         """Create interface for start and end game with mouse"""
-        # pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+        pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         if mode == 'game_start':
             clock = pygame.time.Clock()
             while True:
                 self.window_surface.fill((41, 36, 33))
-                button_1 = self.button(self.window_surface, (220, 150), 'START')
-                button_2 = self.button(self.window_surface, (220, 250), 'QUIT')
+                button_1 = self.button(self.window_surface, (150, 150), 'START')
+                button_2 = self.button(self.window_surface, (150, 250), 'QUIT')
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -119,8 +119,8 @@ class MazeView(pygame.sprite.Sprite):
     def display_elements(self, screen):
         clock = pygame.time.Clock()
         while True:
-            for pos in self.walls:
-                screen.blit(pygame.image.load(WALL), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+            for set_position in self.walls:
+                screen.blit(pygame.image.load(WALL), (set_position.y * SPRITE_SIZE, set_position.x * SPRITE_SIZE))
             for pos in self.floor:
                 screen.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
             # for weap, pos in enumerate(self.weapons):
