@@ -8,6 +8,7 @@ Author:
 Github:
     https://github.com/etiennody
 """
+
 import os
 
 # Default game constants definition
@@ -17,21 +18,20 @@ FLOOR_CHAR = "0"
 WALL_CHAR = "x"
 
 # Initialize window
-WINDOW_WIDTH = 480
+WINDOW_WIDTH = 640
 WINDOW_HEIGHT = 480
-BACKGROUND_COLOR = (153, 153, 255)
+BACKGROUND = os.path.join('LabMac', 'resources', 'images', 'background.png')
 SPRITE_SIZE = 32
 
-
 # Frame rate
-FPS = 60
+FPS = 30
 
 # Images
 MAP = os.path.join('LabMac', 'resources', 'map', 'map.txt')
-HERO = "macgyver.png"
-GUARDIAN = "guardian.png"
-WALL = "wall.png"
-FLOOR = "floor.png"
-ETHER = "ether.png"
-NEEDLE = "needle.png"
-PIPE = "pipe.png"
+HERO = os.path.join('LabMac', 'resources', 'images', 'macgyver.png')
+GUARDIAN = os.path.join('LabMac', 'resources', 'images', 'guardian.png')
+WALL = os.path.join('LabMac', 'resources', 'images', 'wall.png')
+FLOOR = os.path.join('LabMac', 'resources', 'images', 'floor.png')
+ETHER = os.path.join('LabMac', 'resources', 'images', 'ether.png')
+NEEDLE = os.path.join('LabMac', 'resources', 'images', 'needle.png')
+PIPE = os.path.join('LabMac', 'resources', 'images', 'pipe.png')
