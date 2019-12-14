@@ -36,5 +36,5 @@ ETHER = os.path.join('LabMac', 'resources', 'images', 'ether.png')
 NEEDLE = os.path.join('LabMac', 'resources', 'images', 'needle.png')
 PIPE = os.path.join('LabMac', 'resources', 'images', 'pipe.png')
 
-# Sound
-BGM = os.path.join('LabMac', 'resources', 'sound', 'bgm.wav')
+# Audio
+BGM = os.path.join('LabMac', 'resources', 'audio', 'bgm.wav')
