@@ -14,7 +14,7 @@ from pygame.locals import *
 
 from LabMac.model.maze import Maze
 from LabMac.views import LabPygame, MazeView
-from LabMac.constants import BACKGROUND, FPS, WINDOW_WIDTH, WINDOW_HEIGHT#, HERO, SPRITE_SIZE
+from LabMac.constants import WALL, FLOOR, BACKGROUND, FPS, WINDOW_WIDTH, WINDOW_HEIGHT, MAP, SPRITE_SIZE#, HERO
 
 
 class Application:
@@ -32,14 +32,14 @@ class Application:
         """Initialyze the game"""
         self.labpygame.interface(mode='game_start')
 
-        """ICreate a background"""
+        """Create a background"""
         self.labpygame.window_surface.blit(self.background, [0, 0])
 
-        """Dislay elements of the game)"""
-        self.maze_view.display_elements(self.maze)
+        # """Dislay elements of the game)"""
+        # self.maze_view.display_elements(self.window_surface)
 
-        # # Initialize the background music
-        # self.labpygame.play_music_background()
+        # Initialize the background music
+        self.labpygame.play_music_background()
 
         self.open = True
 
