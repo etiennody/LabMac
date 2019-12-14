@@ -25,10 +25,6 @@ class LabPygame(pygame.sprite.Sprite):
         pygame.display.set_caption("LabMac - Help MacGyver !")
         # """Text font"""
         # font = pygame.font.SysFont('Consolas', 15)
-        # """Playing music in background"""
-        # pygame.mixer.init()
-        # pygame.mixer.music.load(BGM)
-        # pygame.mixer.music.play(-1, 0.0)
 
     def show_text(self, window_surface, font, text, color, position):
         """Show the text on screen"""
@@ -95,12 +91,12 @@ class LabPygame(pygame.sprite.Sprite):
         else:
             raise ValueError('Interface.mode unsupport <%s>...' % mode)
 
-        # def play_music_background(self):
-        #     '''Launch the game music background'''
-        #     pygame.mixer.init()
-        #     pygame.mixer.music.load(BGM)
-        #     pygame.mixer.music.play(-1)
-        #     pygame.mixer.music.set_volume(0.2)
+    def play_music_background(self):
+        '''Launch the game music background'''
+        pygame.mixer.init()
+        pygame.mixer.music.load(BGM)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.2)
 
 
 class MazeView(pygame.sprite.Sprite):
@@ -115,14 +111,13 @@ class MazeView(pygame.sprite.Sprite):
         self.exit = None
         self.width = None
         self.height = None
+        self.window_surface = WINDOW_WIDTH * WINDOW_HEIGHT
 
-    def display_elements(self, screen):
+    def display_elements(self, window_surface):
         clock = pygame.time.Clock()
         while True:
-            for set_position in self.walls:
-                screen.blit(pygame.image.load(WALL), (set_position.y * SPRITE_SIZE, set_position.x * SPRITE_SIZE))
-            for pos in self.floor:
-                screen.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
+            self.window_surface.blit(pygame.image.load(WALL), (self.maze.walls.y * SPRITE_SIZE, self.maze.walls.x * SPRITE_SIZE))
+            # self.window_surface.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
             # for weap, pos in enumerate(self.weapons):
             #     if weap == 0:
             #         self.window_surface.blit(self.needle_render, (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
