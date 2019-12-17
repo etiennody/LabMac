@@ -12,9 +12,9 @@ GitHub:
 import pygame
 import random
 
-from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR, WALL, FLOOR, SPRITE_SIZE
+from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
 from LabMac.model.position import Position
-from LabMac.model.items import Weapon#, Hero
+from LabMac.model.items import Weapon, Hero
 
 
 class Maze(pygame.sprite.Sprite):
@@ -44,7 +44,7 @@ class Maze(pygame.sprite.Sprite):
                     if character == START_CHAR:
                         self.start = position
                         self.floor.append(position)
-                        # self.hero = Hero(x=char, y=lin)
+                        self.hero = Hero(x=char, y=lin)
                     elif character == EXIT_CHAR:
                         self.exit = position
                         self.floor.append(position)
@@ -116,10 +116,3 @@ class Maze(pygame.sprite.Sprite):
             self.weapons.append(
                 Weapon(x=position.x, y=position.y, name=weapon_names.pop())
             )
-
-    def display_elements(self, screen):
-        while True:
-            for pos in self.walls:
-                screen.blit(pygame.image.load(WALL), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
-            for pos in self.floor:
-                screen.blit(pygame.image.load(FLOOR), (pos.y * SPRITE_SIZE, pos.x * SPRITE_SIZE))
