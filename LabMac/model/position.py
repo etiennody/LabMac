@@ -34,12 +34,12 @@ class Position:
     @property
     def x_pixel(self):
         '''Property that calculates the pixel position'''
-        return self.x * SPRITE_SIZE
+        self.x * SPRITE_SIZE
 
     @property
     def y_pixel(self):
         '''Property that calculates the pixel position'''
-        return self.y * SPRITE_SIZE
+        self.y * SPRITE_SIZE
 
     # x, y : positions
     def set_position(self, x, y):
