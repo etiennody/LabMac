@@ -16,7 +16,7 @@ from LabMac.model.position import Position, Movement
 class Hero(Movement):
     def __init__(self, x, y):
         super().__init__(x, y)
-        # self.maze.hero = self
+        self.position = None
         self.inventory = []
 
     def __repr__(self):
