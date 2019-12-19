@@ -13,43 +13,41 @@ import sys
 import pygame
 
 from LabMac.model.maze import Maze
-# from LabMac.model.items import Hero
-from LabMac.views import LabPygame, MazeView#, HeroView
-from LabMac.constants import FPS#, SPRITE_SIZE, WALL, WALL_CHAR, FLOOR, FLOOR_CHAR, EXIT_CHAR, GUARDIAN, NEEDLE, ETHER, PIPE, HERO
+from LabMac.model.items import Hero
+from LabMac.views import LabPygame, MazeView, HeroView
+from LabMac.constants import FPS
 
 
 class Application:
 
     def __init__(self):
         self.open = False
+        # Initialize clock
+        self.clock = pygame.time.Clock()
         self.labpygame = LabPygame()
         self.maze = Maze("./LabMac/resources/map/map.txt")
         self.maze_view = MazeView(maze=self.maze)
-        """Initialize clock"""
-        self.clock = pygame.time.Clock()
-        # self.hero = Hero(maze=self.maze, x=self.x, y=self.y)
-        # self.hero_view = HeroView(hero=self.maze.hero)
-        # Initialyze sprites
-        # self.hero_sprites = pygame.sprite.RenderPlain((self.hero))
+        self.hero = Hero(x=self.maze.hero.x, y=self.maze.hero.y)
+        self.hero_view = HeroView(hero=self.hero, maze=self.maze)
 
     def loop(self):
         """Launch the game with start interface"""
         self.labpygame.interface(mode='game_start')
 
-        """Initialize the background music"""
+        # Initialize the background music
         self.labpygame.play_music_background()
 
         self.open = True
-        """Launch the main loop events"""
+        # Launch the main loop events
         while self.open:
-            """Make sure that the game doesn't run at more than 30 frames per second"""
+            # Make sure that the game doesn't run at more than 30 frames per second
             self.clock.tick(FPS)
             """Listen events"""
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            """Change the direction according to the keyboard event"""
+            # Change the direction according to the keyboard event
             keys = pygame.key.get_pressed()
             if keys[pygame.K_UP] != 0:
                 self.maze.move_hero_up()
@@ -60,13 +58,15 @@ class Application:
             if keys[pygame.K_RIGHT] != 0:
                 self.maze.move_hero_right()
 
-            """Initialyze the window"""
+            # Initialize the window
             self.labpygame.window_surface.blit(self.labpygame.background, (0, 0))
 
-            # Display elements of the game"""
+            # Display elements of the game
             self.maze_view.display_elements()
 
-            # self.hero.pick_up_weapon()
+            # self.hero_view.display_hero()
+
+            # self.hero.pick_up_weapon(self.weapon.x, self.weapon.y)
 
             # self.hero.fight_guarrdian()
 
