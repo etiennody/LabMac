@@ -12,6 +12,7 @@ Github:
 import sys
 import pygame
 
+from LabMac.model.position import Position
 from LabMac.model.items import Weapon
 from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, BGM, HERO, SPRITE_SIZE, WALL, WALL_CHAR, FLOOR, FLOOR_CHAR, GUARDIAN, NEEDLE, PIPE, ETHER#, HERO, EXIT_CHAR,#, BGM, ETHER, PIPE
 
@@ -22,6 +23,7 @@ class LabPygame(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         """Initialize the window display"""
         pygame.init()
+        self.clock = pygame.time.Clock()
         self.size = (WINDOW_WIDTH, WINDOW_HEIGHT)
         self.window_surface = pygame.display.set_mode(self.size)
         pygame.display.set_caption("LabMac - Help MacGyver !")
@@ -29,8 +31,8 @@ class LabPygame(pygame.sprite.Sprite):
         self.background = pygame.Surface(self.window_surface.get_size())
         self.background = self.background.convert()
         self.background.fill((41, 36, 33))
-        # """Text font"""
-        # font = pygame.font.SysFont('Consolas', 15)
+        """Text font"""
+        self.font = pygame.font.SysFont('Consolas', 30)
 
     def show_text(self, window_surface, font, text, color, position):
         """Show the text on screen"""
@@ -48,7 +50,7 @@ class LabPygame(pygame.sprite.Sprite):
         pygame.draw.line(window_surface, linecolor, (left, top + bheight), (left + bwidth, top + bheight), 5)
         pygame.draw.line(window_surface, linecolor, (left + bwidth, top + bheight), (left + bwidth, top), 5)
         pygame.draw.rect(window_surface, buttoncolor, (left, top, bwidth, bheight))
-        font = pygame.font.SysFont('Consolas', 30)
+        font = pygame.font.SysFont('Consolas', 25)
         text_render = font.render(text, 1, textcolor)
         rect = text_render.get_rect()
         rect.centerx, rect.centery = left + bwidth / 2, top + bheight / 2
@@ -97,6 +99,58 @@ class LabPygame(pygame.sprite.Sprite):
         else:
             raise ValueError('Interface.mode unsupport <%s>...' % mode)
 
+    def display_win(self):
+        clock = pygame.time.Clock()
+        while True:
+            self.window_surface.fill((41, 36, 33))
+            # self.font = pygame.font.SysFont('Consolas', 30)
+            self.text = self.font.render(
+                "YOU WIN!!", 1, (255, 255, 255))
+            self.textPos = self.text.get_rect()
+            self.textPos.centerx = self.window_surface.get_rect().centerx
+            self.textPos.centery = self.window_surface.get_rect().centery
+            self.window_surface.blit(self.text, self.textPos)
+            button_1 = self.button(self.window_surface, (150, 290), 'RESTART')
+            button_2 = self.button(self.window_surface, (150, 390), 'QUIT')
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit(-1)
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_1.collidepoint(pygame.mouse.get_pos()):
+                        return True
+                    elif button_2.collidepoint(pygame.mouse.get_pos()):
+                        pygame.quit()
+                        sys.exit(-1)
+            pygame.display.update()
+            clock.tick(FPS)
+
+    def display_lose(self):
+        clock = pygame.time.Clock()
+        while True:
+            self.window_surface.fill((41, 36, 33))
+            # self.font = pygame.font.SysFont('Consolas', 30)
+            self.text = self.font.render(
+                "GAME OVER... Let's try again!", 1, (255, 255, 255))
+            self.textPos = self.text.get_rect()
+            self.textPos.centerx = self.window_surface.get_rect().centerx
+            self.textPos.centery = self.window_surface.get_rect().centery
+            self.window_surface.blit(self.text, self.textPos)
+            button_1 = self.button(self.window_surface, (150, 280), 'RESTART')
+            button_2 = self.button(self.window_surface, (150, 380), 'QUIT')
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit(-1)
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if button_1.collidepoint(pygame.mouse.get_pos()):
+                        return True
+                    elif button_2.collidepoint(pygame.mouse.get_pos()):
+                        pygame.quit()
+                        sys.exit(-1)
+            pygame.display.update()
+            clock.tick(FPS)
+
     def play_music_background(self):
         '''Launch the background music of the game'''
         pygame.mixer.init()
@@ -112,7 +166,6 @@ class MazeView(pygame.sprite.Sprite):
         self.window_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.x = (WINDOW_WIDTH * SPRITE_SIZE)
         self.y = (WINDOW_HEIGHT * SPRITE_SIZE)
-        # self.clock = pygame.time.Clock()
 
         # self.maze_render = pygame.Surface(self.window_surface.get_size()).convert()
         # self.maze_render.fill((255, 255, 255))
@@ -154,21 +207,100 @@ class MazeView(pygame.sprite.Sprite):
                 self.window_surface.blit(self.pipe_render, (pos.x * SPRITE_SIZE, pos.y * SPRITE_SIZE))
         self.window_surface.blit(self.guardian_render, (self.maze.exit.x * SPRITE_SIZE, self.maze.exit.y * SPRITE_SIZE))
         pygame.display.update()
-        # self.clock.tick(FPS)
+
+    # def display_win(self):
+    #     clock = pygame.time.Clock()
+    #     while True:
+    #         self.window_surface.fill((41, 36, 33))
+    #         self.font = pygame.font.SysFont('Consolas', 30)
+    #         self.text = self.font.render("***** YOU WIN!! YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN *****", 1, (0, 153, 0))
+
+    #         button_1 = self.button(self.window_surface, (150, 150), 'RESTART')
+    #         button_2 = self.button(self.window_surface, (150, 250), 'QUIT')
+    #         for event in pygame.event.get():
+    #             if event.type == pygame.QUIT:
+    #                 pygame.quit()
+    #                 sys.exit(-1)
+    #             elif event.type == pygame.MOUSEBUTTONDOWN:
+    #                 if button_1.collidepoint(pygame.mouse.get_pos()):
+    #                     return True
+    #                 elif button_2.collidepoint(pygame.mouse.get_pos()):
+    #                     pygame.quit()
+    #                     sys.exit(-1)
+    #         pygame.display.update()
+    #         clock.tick(FPS)
+
+    # def display_lose(self):
+    #     clock = pygame.time.Clock()
+    #     while True:
+    #         self.window_surface.fill((41, 36, 33))
+    #         self.font = pygame.font.SysFont('Consolas', 30)
+    #         self.text = self.font.render("***** GAME OVER *****", 1, (0, 153, 0))
+
+    #         button_1 = self.button(self.window_surface, (150, 150), 'RESTART')
+    #         button_2 = self.button(self.window_surface, (150, 250), 'QUIT')
+    #         for event in pygame.event.get():
+    #             if event.type == pygame.QUIT:
+    #                 pygame.quit()
+    #                 sys.exit(-1)
+    #             elif event.type == pygame.MOUSEBUTTONDOWN:
+    #                 if button_1.collidepoint(pygame.mouse.get_pos()):
+    #                     return True
+    #                 elif button_2.collidepoint(pygame.mouse.get_pos()):
+    #                     pygame.quit()
+    #                     sys.exit(-1)
+    #         pygame.display.update()
+    #         clock.tick(FPS)
 
 
 class HeroView(LabPygame, pygame.sprite.Sprite):
 
     def __init__(self, maze, hero):
-        pygame.sprite.Sprite.__init__(self)
         super().__init__()
         self.hero = hero
         self.maze = maze
-        self.hero_img = pygame.image.load(HERO).convert_alpha()
-        self.rect = self.hero_img.get_rect()
+        self.hero_img = pygame.image.load(HERO)
         self.hero_render = pygame.transform.scale(self.hero_img, (30, 30))
-        self.rect.topleft = self.maze.hero.x, self.maze.hero.y
+        # self.rect = self.hero_img.get_rect()
+        # self.rect.topleft = self.maze.hero.x, self.maze.hero.y
 
     def display_hero(self):
         self.window_surface.blit(self.hero_render, (self.maze.hero.x * SPRITE_SIZE, self.maze.hero.y * SPRITE_SIZE))
         pygame.display.update()
+
+
+class EndView:
+
+    def __init__(self, victory: bool):
+
+        if mode == 'game_start':
+            clock = pygame.time.Clock()
+            while True:
+                self.window_surface.fill((41, 36, 33))
+                self.font = pygame.font.Font(None, 28)
+                if victory:
+                    self.text = self.font.render("***** YOU WIN!! YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN *****", 1, (0, 153, 0))
+                else:
+                    self.text = self.font.render("*****__GAME OVER__*****", 1, (153, 0, 0))
+        self.textPos = self.text.get_rect()
+        self.textPos.centerx = self.end_render.get_rect().centerx
+        self.textPos.centery = self.end_render.get_rect().centery
+        self.end_render.blit(self.text, self.textPos)
+        pygame.display.update()
+        clock.tick(FPS)
+
+        # self.end_render = pygame.Surface(
+        #     pygame_object.screen.get_size()).convert()
+        # self.end_render.fill((15, 15, 15))
+
+        # self.font = pygame.font.Font(None, 28)
+        # if victory:
+        #     self.text = self.font.render(
+        #         'Vous vous étes échapé, Victoire !', 1, (0, 153, 0))
+        # else:
+        #     self.text = self.font.render(
+        #         'Le gardien vous attrape, Défaite !', 1, (153, 0, 0))
+        # self.textPos = self.text.get_rect()
+        # self.textPos.centerx = self.end_render.get_rect().centerx
+        # self.textPos.centery = self.end_render.get_rect().centery
+        # self.end_render.blit(self.text, self.textPos)
