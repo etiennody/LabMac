@@ -9,7 +9,6 @@ GitHub:
     https://github.com/etiennody
 """
 
-# from LabMac.constants import HERO
 from LabMac.model.position import Position, Movement
 
 
@@ -31,7 +30,7 @@ class Hero(Movement):
     """Put positions weapons in inventory"""
     def in_inventory(self):
         self.inventory.append(self.set_position)
-        return "You have found a weapon"
+        # return "You have found a weapon"
         return f"You have {len(self.inventory)} weapon(s) in your inventory"
 
 
