@@ -13,6 +13,7 @@ import pygame
 import random
 
 from LabMac.constants import FLOOR_CHAR, START_CHAR, EXIT_CHAR
+from LabMac.views import LabPygame
 from LabMac.model.position import Position
 from LabMac.model.items import Weapon, Hero
 
@@ -30,6 +31,7 @@ class Maze(pygame.sprite.Sprite):
         self.height = None
         self.load(filename)
         self.random_positions_weapons()
+        self.labpygame = LabPygame()
 
     def __contains__(self, set_position):
         return set_position in self.floor
@@ -64,7 +66,7 @@ class Maze(pygame.sprite.Sprite):
             self.hero.up()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("YOU HAVE FIND A WEAPON!")
+                    print(f"You have {len(self.hero.inventory)} weapon(s) in your inventory")
                     self.hero.pick_up_weapon(weapon)
 
     def move_hero_down(self):
@@ -72,7 +74,7 @@ class Maze(pygame.sprite.Sprite):
             self.hero.down()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("YOU HAVE FIND A WEAPON!")
+                    print(f"You have {len(self.hero.inventory)} weapon(s) in your inventory")
                     self.hero.pick_up_weapon(weapon)
 
     def move_hero_left(self):
@@ -80,7 +82,7 @@ class Maze(pygame.sprite.Sprite):
             self.hero.left()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("YOU HAVE FIND A WEAPON!")
+                    print(f"You have {len(self.hero.inventory)} weapon(s) in your inventory")
                     self.hero.pick_up_weapon(weapon)
 
     def move_hero_right(self):
@@ -88,7 +90,7 @@ class Maze(pygame.sprite.Sprite):
             self.hero.right()
             for weapon in self.weapons:
                 if self.hero == weapon:
-                    print("YOU HAVE FIND A WEAPON!")
+                    print(f"You have {len(self.hero.inventory)} weapon(s) in your inventory")
                     self.hero.pick_up_weapon(weapon)
 
     # def is_exit_hero(self):
@@ -101,11 +103,19 @@ class Maze(pygame.sprite.Sprite):
     def fight_guardian(self):
         if self.hero == self.exit:
             if len(self.hero.inventory) == len(self.weapons):
-                return "\n***** YOU WIN!! YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN *****"
+                return self.labpygame.display_win()
             else:
-                return "\n*****__GAME OVER__*****"
+                return self.labpygame.display_lose()
         else:
             return False
+
+         #    if self.hero == self.exit:
+         #    if len(self.hero.inventory) == len(self.weapons):
+         #        return "\n***** YOU WIN!! YOU HAVE FIND THE EXIT AND SEDATED THE GUARDIAN *****"
+         #     else:
+         #         return "\n*****__GAME OVER__*****"
+         # else:
+         #    return False
 
     # Get random positions for weapons
     def random_positions_weapons(self):
