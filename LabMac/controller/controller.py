@@ -22,8 +22,6 @@ class Application:
 
     def __init__(self):
         self.open = False
-        # Initialize clock
-        self.clock = pygame.time.Clock()
         self.labpygame = LabPygame()
         self.maze = Maze("./LabMac/resources/map/map.txt")
         self.maze_view = MazeView(maze=self.maze)
@@ -38,15 +36,19 @@ class Application:
         self.labpygame.play_music_background()
 
         self.open = True
+
         # Launch the main loop events
         while self.open:
+
             # Make sure that the game doesn't run at more than 30 frames per second
-            self.clock.tick(FPS)
+            self.labpygame.clock.tick(FPS)
+
             """Listen events"""
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
             # Change the direction according to the keyboard event
             keys = pygame.key.get_pressed()
             if keys[pygame.K_UP] != 0:
@@ -61,38 +63,41 @@ class Application:
             # Initialize the window
             self.labpygame.window_surface.blit(self.labpygame.background, (0, 0))
 
-            # Display elements of the game
+            # Display elements(walls, floor, weapons, guardian) of the game
             self.maze_view.display_elements()
 
-            # self.hero_view.display_hero()
+            # Display hero of the game
+            self.hero_view.display_hero()
 
-            # self.hero.pick_up_weapon(self.weapon.x, self.weapon.y)
+            # self.hero.pick_up_weapon()
 
-            # self.hero.fight_guarrdian()
+            self.maze.fight_guardian()
 
-            self.maze_view.update()
+            # self.maze_view.update()
+
+            result = self.maze.fight_guardian()
+            if result is False:
+                continue
+            return result
+            # pygame.display.flip()
 
             # result = self.maze.fight_guardian()
-            # if result is None:
-            # continue
-            #     print(result)
-            #     pygame.display.flip()
 
-            # result = self.maze.fight_guardian() # None, True, False
-
-            # if result is None:
-            #     continue
+            # # if result is None:
+            # #     continue
 
             # if result:
-            #     self.maze_view.display_win()
+            #     self.labpygame.display_win()
             #     return
-            # else result:
-            #     self.maze_view.display_game_over()
+            # else:
+            #     self.labpygame.display_lose()
             #     return
             pygame.display.update()
             pygame.display.flip()
+            self.labpygame.clock.tick(FPS)
+            pygame.time.wait(35)
 
-        self.labpygame.interface(mode='game_end')
+        # self.labpygame.interface(mode='game_end')
 
 
 def main():
