@@ -8,7 +8,6 @@ Author:
 Github:
     https://github.com/etiennody
 """
-# from LabMac.constants import SPRITE_SIZE
 
 
 class Position:
@@ -20,7 +19,7 @@ class Position:
     def __repr__(self):
         return f"Position({self.x}, {self.y})"
 
-        # Define the equality between self position and another position
+    # Define the equality between self position and another position
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
 
