@@ -19,8 +19,9 @@ WALL_CHAR = "x"
 
 # Initialize window
 WINDOW_WIDTH = 480
-WINDOW_HEIGHT = 480
+WINDOW_HEIGHT = 512
 BACKGROUND = os.path.join('LabMac', 'resources', 'images', 'background.png')
+BAR_COLOR = (41, 36, 33)
 SPRITE_SIZE = 32
 
 # Frame rate
