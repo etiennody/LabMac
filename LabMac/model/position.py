@@ -30,6 +30,9 @@ class Position:
     def __add__(self, movement):
         return Position(self.x + movement.mx, self.y + movement.my)
 
+    def __str__(self):
+        return str(self.x) + " " + str(self.y)
+
     # x, y : positions
     def set_position(self, x, y):
         self.x = x
