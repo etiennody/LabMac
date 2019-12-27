@@ -21,7 +21,8 @@ WALL_CHAR = "x"
 WINDOW_WIDTH = 480
 WINDOW_HEIGHT = 512
 BACKGROUND = os.path.join('LabMac', 'resources', 'images', 'background.png')
-BAR_COLOR = (41, 36, 33)
+BACKGROUND_COLOR = (41, 36, 33)
+TEXT_COLOR = (255, 255, 255)
 SPRITE_SIZE = 32
 
 # Frame rate
