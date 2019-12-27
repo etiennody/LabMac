@@ -12,10 +12,10 @@ GitHub:
 import sys
 import pygame
 
+from LabMac.constants import FPS
 from LabMac.model.maze import Maze
 from LabMac.model.items import Hero
-from LabMac.views import LabPygame, MazeView, HeroView
-from LabMac.constants import FPS
+from LabMac.views import LabPygame, MazeView, HeroView, Bar
 
 
 class Application:
@@ -27,6 +27,7 @@ class Application:
         self.maze_view = MazeView(maze=self.maze)
         self.hero = Hero(x=self.maze.hero.x, y=self.maze.hero.y)
         self.hero_view = HeroView(hero=self.hero, maze=self.maze)
+        self.bar = Bar(hero=self.hero)
 
     def loop(self):
         """Launch the game with start interface"""
@@ -35,11 +36,8 @@ class Application:
         # Initialize the background music
         self.labpygame.play_music_background()
 
-        self.open = True
-
         # Launch the main loop events
-        while self.open:
-
+        while not self.open:
             # Make sure that the game doesn't run at more than 30 frames per second
             self.labpygame.clock.tick(FPS)
 
@@ -61,43 +59,24 @@ class Application:
                 self.maze.move_hero_right()
 
             # Initialize the window
-            self.labpygame.window_surface.blit(self.labpygame.background, (0, 0))
+            self.labpygame.window_surface.blit(self.labpygame.background, (0, 480))
 
-            # Display elements(walls, floor, weapons, guardian) of the game
+            # Display the bar info
+            self.bar.display_bar()
+
+            # Display elements(walls, floor, guardian) of the game
             self.maze_view.display_elements()
 
             # Display hero of the game
             self.hero_view.display_hero()
 
-            # self.hero.pick_up_weapon()
-
-            self.maze.fight_guardian()
-
-            # self.maze_view.update()
-
             result = self.maze.fight_guardian()
             if result is False:
                 continue
             return result
-            # pygame.display.flip()
 
-            # result = self.maze.fight_guardian()
-
-            # # if result is None:
-            # #     continue
-
-            # if result:
-            #     self.labpygame.display_win()
-            #     return
-            # else:
-            #     self.labpygame.display_lose()
-            #     return
-            pygame.display.update()
             pygame.display.flip()
             self.labpygame.clock.tick(FPS)
-            pygame.time.wait(35)
-
-        # self.labpygame.interface(mode='game_end')
 
 
 def main():
