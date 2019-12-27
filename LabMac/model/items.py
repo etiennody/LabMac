@@ -38,3 +38,6 @@ class Weapon(Position):
     def __init__(self, name, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.name = name
+
+    def has_position(self):
+        return self.x and self.y
