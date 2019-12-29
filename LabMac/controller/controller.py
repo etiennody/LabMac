@@ -38,25 +38,23 @@ class Application:
 
         # Launch the main loop events
         while not self.open:
-            # Make sure that the game doesn't run at more than 30 frames per second
-            self.labpygame.clock.tick(FPS)
-
-            """Listen events"""
+            # Listen events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
-            # Change the direction according to the keyboard event
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_UP] != 0:
-                self.maze.move_hero_up()
-            if keys[pygame.K_DOWN] != 0:
-                self.maze.move_hero_down()
-            if keys[pygame.K_LEFT] != 0:
-                self.maze.move_hero_left()
-            if keys[pygame.K_RIGHT] != 0:
-                self.maze.move_hero_right()
+                if event.type == pygame.KEYDOWN:
+                    # Change the direction according to the keyboard event
+                    keys = pygame.key.get_pressed()
+                    if keys[pygame.K_UP] != 0:
+                        self.maze.move_hero_up()
+                    if keys[pygame.K_DOWN] != 0:
+                        self.maze.move_hero_down()
+                    if keys[pygame.K_LEFT] != 0:
+                        self.maze.move_hero_left()
+                    if keys[pygame.K_RIGHT] != 0:
+                        self.maze.move_hero_right()
 
             # Initialize the window
             self.labpygame.window_surface.blit(self.labpygame.background, (0, 480))
@@ -70,10 +68,7 @@ class Application:
             # Display hero of the game
             self.hero_view.display_hero()
 
-            result = self.maze.fight_guardian()
-            if result is False:
-                continue
-            return result
+            self.maze.fight_guardian()
 
             pygame.display.flip()
             self.labpygame.clock.tick(FPS)
