@@ -14,7 +14,7 @@ import pygame
 
 from LabMac.constants import FPS
 from LabMac.model.maze import Maze
-from LabMac.model.items import Hero
+# from LabMac.model.items import Hero
 from LabMac.views import LabPygame, MazeView, HeroView, Bar
 
 
@@ -25,13 +25,12 @@ class Application:
         self.labpygame = LabPygame()
         self.maze = Maze("./LabMac/resources/map/map.txt")
         self.maze_view = MazeView(maze=self.maze)
-        self.hero = Hero(x=self.maze.hero.x, y=self.maze.hero.y)
-        self.hero_view = HeroView(hero=self.hero, maze=self.maze)
-        self.bar = Bar(hero=self.hero)
+        self.hero_view = HeroView(hero=self.maze.hero, maze=self.maze)
+        self.bar = Bar(hero=self.maze.hero)
 
     def loop(self):
         """Launch the game with start interface"""
-        self.labpygame.interface(mode='game_start')
+        self.labpygame.interface()
 
         # Initialize the background music
         self.labpygame.play_music_background()
@@ -57,7 +56,9 @@ class Application:
                         self.maze.move_hero_right()
 
             # Initialize the window
-            self.labpygame.window_surface.blit(self.labpygame.background, (0, 480))
+            self.labpygame.window_surface.blit(
+                self.labpygame.background, (0, 480)
+            )
 
             # Display the bar info
             self.bar.display_bar()
@@ -68,10 +69,16 @@ class Application:
             # Display hero of the game
             self.hero_view.display_hero()
 
-            self.maze.fight_guardian()
-
-            pygame.display.flip()
-            self.labpygame.clock.tick(FPS)
+            response = self.maze.fight_guardian()
+            if response is None:
+                pygame.display.flip()
+                self.labpygame.clock.tick(FPS)
+            elif response:
+                self.labpygame.play_win_sound()
+                self.labpygame.display_win()
+            else:
+                self.labpygame.play_gameover_sound()
+                self.labpygame.display_lose()
 
 
 def main():
