@@ -40,3 +40,5 @@ PIPE = os.path.join('LabMac', 'resources', 'images', 'pipe.png')
 
 # Audio
 BGM = os.path.join('LabMac', 'resources', 'audio', 'bgm.wav')
+WIN_SOUND = os.path.join('LabMac', 'resources', 'audio', 'win.wav')
+GAMEOVER_SOUND = os.path.join('LabMac', 'resources', 'audio', 'gameover.wav')
