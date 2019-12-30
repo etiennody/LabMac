@@ -19,7 +19,7 @@ class LabPygame(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        """Initialize the window display"""
+        """Initialize pygame and the window display"""
         pygame.init()
         self.open = False
         self.clock = pygame.time.Clock()
@@ -30,11 +30,11 @@ class LabPygame(pygame.sprite.Sprite):
         self.background = pygame.Surface(self.window_surface.get_size())
         self.background = self.background.convert()
         self.background.fill(BACKGROUND_COLOR)
-        """Text font"""
+        # Text font
         self.font = pygame.font.SysFont('swiss', 30)
 
     def show_text(self, window_surface, font, text, color, position):
-        """Show the text on screen"""
+        """Generate the text on the screen"""
         text_render = font.render(text, True, color)
         rect = text_render.get_rect()
         rect.left, rect.top = position
@@ -73,7 +73,10 @@ class LabPygame(pygame.sprite.Sprite):
         return self.window_surface.blit(text_render, rect)
 
     def interface(self, mode='game_start'):
-        """Create interface for start with mouse"""
+        """
+        Create interface when the game is open and the player can use
+        the mouse to play
+        """
         clock = pygame.time.Clock()
         while True:
             self.window_surface.fill(BACKGROUND_COLOR)
@@ -95,7 +98,9 @@ class LabPygame(pygame.sprite.Sprite):
             clock.tick(FPS)
 
     def display_win(self):
-        """Create interface when player win and use mouse"""
+        """
+        Create interface when player win and can use mouse to leave the game
+        """
         clock = pygame.time.Clock()
         while True:
             self.window_surface.fill(BACKGROUND_COLOR)
@@ -118,7 +123,9 @@ class LabPygame(pygame.sprite.Sprite):
             clock.tick(FPS)
 
     def display_lose(self):
-        """Create interface when player lose and use mouse"""
+        """
+        Create interface when player lose and can use mouse to leave the game
+        """
         clock = pygame.time.Clock()
         while True:
             self.window_surface.fill(BACKGROUND_COLOR)
@@ -148,14 +155,14 @@ class LabPygame(pygame.sprite.Sprite):
         pygame.mixer.music.set_volume(0.1)
 
     def play_win_sound(self):
-        """Launch the background music of the game"""
+        """Launch the win sound when the player wins the game"""
         pygame.mixer.init()
         pygame.mixer.music.load(WIN_SOUND)
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
 
     def play_gameover_sound(self):
-        """Launch the background music of the game"""
+        """Launch the game over sound when the player loses the game"""
         pygame.mixer.init()
         pygame.mixer.music.load(GAMEOVER_SOUND)
         pygame.mixer.music.play(-1)
@@ -169,26 +176,27 @@ class MazeView(pygame.sprite.Sprite):
         self.window_surface = pygame.display.set_mode(
             (WINDOW_WIDTH, WINDOW_HEIGHT)
         )
+        # Initialize the images of the walls
         self.walls_img = pygame.image.load(WALL).convert()
         self.walls_rect = self.walls_img.get_rect()
         self.walls_render = pygame.transform.scale(self.walls_img, (32, 32))
-        #
+        # Initialize the images of the floor
         self.floor_img = pygame.image.load(FLOOR).convert()
         self.floor_rect = self.floor_img.get_rect()
         self.floor_render = pygame.transform.scale(self.floor_img, (32, 32))
-        #
+        # Initialize the images of the needle
         self.needle_img = pygame.image.load(NEEDLE).convert_alpha()
         self.needle_rect = self.needle_img.get_rect()
         self.needle_render = pygame.transform.scale(self.needle_img, (30, 30))
-        #
+        # Initialize the images of the ether
         self.ether_img = pygame.image.load(ETHER).convert_alpha()
         self.ether_rect = self.ether_img.get_rect()
         self.ether_render = pygame.transform.scale(self.ether_img, (30, 30))
-        #
+        # Initialize the images of the pipe
         self.pipe_img = pygame.image.load(PIPE).convert_alpha()
         self.pipe_rect = self.pipe_img.get_rect()
         self.pipe_render = pygame.transform.scale(self.pipe_img, (30, 30))
-        #
+        # Initialize the image of the guardian
         self.guardian_img = pygame.image.load(GUARDIAN).convert_alpha()
         self.guardian_rect = self.guardian_img.get_rect()
         self.guardian_render = pygame.transform.scale(
@@ -196,14 +204,14 @@ class MazeView(pygame.sprite.Sprite):
         )
 
     def display_elements(self):
-        # Display the image of walls in its position
+        # Display the images of walls in its position
         for wall in self.maze.walls:
             self.window_surface.blit(
                 self.walls_render, (
                     wall.x * SPRITE_SIZE, wall.y * SPRITE_SIZE
                 )
             )
-        # Display the image of floor in its position
+        # Display the images of floor in its position
         for floor in self.maze.floor:
             self.window_surface.blit(
                 self.floor_render, (
@@ -246,15 +254,16 @@ class HeroView(LabPygame, pygame.sprite.Sprite):
 
     def __init__(self, maze, hero):
         super().__init__()
-
         self.hero = hero
         self.maze = maze
+        # Initialize the image of the hero, Mac Gyver
         self.hero_img = pygame.image.load(HERO)
         self.hero_render = pygame.transform.scale(self.hero_img, (30, 30))
         self.rect = self.hero_img.get_rect()
         self.rect.topleft = self.maze.hero.x, self.maze.hero.y
 
     def display_hero(self):
+        # Display the image of the hero, Mac Gyver
         self.window_surface.blit(self.hero_render, (
             self.maze.hero.x * SPRITE_SIZE, self.maze.hero.y * SPRITE_SIZE))
         pygame.display.update()
@@ -263,6 +272,7 @@ class HeroView(LabPygame, pygame.sprite.Sprite):
 class Bar(LabPygame, pygame.sprite.Sprite):
 
     def __init__(self, hero):
+        """Initialise the bar info, text and the display"""
         super().__init__()
         pygame.font.init()
         self.hero = hero
@@ -272,6 +282,11 @@ class Bar(LabPygame, pygame.sprite.Sprite):
         self.rect.topleft = 5, 480
 
     def generate_text(self):
+        """
+        Create a sentence if a weapon is in inventory.
+        Help the player to know
+        how many weapons are in the inventory of Mac Gyver
+        """
         if len(self.hero.inventory) == 0:
             self.image = self.font.render(
                 f"Help MacGyver! Find 3 weapons to sedate the guardian.",
@@ -294,5 +309,6 @@ class Bar(LabPygame, pygame.sprite.Sprite):
                 True, TEXT_COLOR)
 
     def display_bar(self):
+        """Display the information bar"""
         self.generate_text()
         self.window_surface.blit(self.image, self.rect)

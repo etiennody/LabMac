@@ -59,11 +59,13 @@ class Maze(pygame.sprite.Sprite):
             self.height = lin + 1
 
     def can_move_to(self, x, y):
+        """Verify if a kind position is in the floor position"""
         return Position(x, y) in self.floor
 
     def move_hero_up(self):
         if self.can_move_to(self.hero.x, self.hero.y - 1):
             self.hero.up()
+            # Take a weapon when the hero moves up
             for weapon in self.weapons:
                 if self.hero == weapon:
                     self.hero.pick_up_weapon(weapon)
@@ -71,6 +73,7 @@ class Maze(pygame.sprite.Sprite):
     def move_hero_down(self):
         if self.can_move_to(self.hero.x, self.hero.y + 1):
             self.hero.down()
+            # Take a weapon when the hero moves down
             for weapon in self.weapons:
                 if self.hero == weapon:
                     self.hero.pick_up_weapon(weapon)
@@ -78,6 +81,7 @@ class Maze(pygame.sprite.Sprite):
     def move_hero_left(self):
         if self.can_move_to(self.hero.x - 1, self.hero.y):
             self.hero.left()
+            # Take a weapon when the hero moves left
             for weapon in self.weapons:
                 if self.hero == weapon:
                     self.hero.pick_up_weapon(weapon)
@@ -85,6 +89,7 @@ class Maze(pygame.sprite.Sprite):
     def move_hero_right(self):
         if self.can_move_to(self.hero.x + 1, self.hero.y):
             self.hero.right()
+            # Take a weapon when the hero moves right
             for weapon in self.weapons:
                 if self.hero == weapon:
                     self.hero.pick_up_weapon(weapon)
@@ -98,6 +103,7 @@ class Maze(pygame.sprite.Sprite):
     def random_positions_weapons(self):
         positions = random.sample(
             set(self.floor) - {self.start, self.exit}, 3)
+        # Define a name for each weapons
         weapon_names = ["ether", "pipe", "needle"]
         for position in positions:
             self.weapons.append(

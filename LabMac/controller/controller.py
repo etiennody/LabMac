@@ -14,13 +14,16 @@ import pygame
 
 from LabMac.constants import FPS
 from LabMac.model.maze import Maze
-# from LabMac.model.items import Hero
 from LabMac.views import LabPygame, MazeView, HeroView, Bar
 
 
 class Application:
 
     def __init__(self):
+        """
+        Initialise pygame with labpygame object, the maze, the hero
+        and the info bar
+        """
         self.open = False
         self.labpygame = LabPygame()
         self.maze = Maze("./LabMac/resources/map/map.txt")
@@ -28,8 +31,9 @@ class Application:
         self.hero_view = HeroView(hero=self.maze.hero, maze=self.maze)
         self.bar = Bar(hero=self.maze.hero)
 
+    # Define the main loop of the game
     def loop(self):
-        """Launch the game with start interface"""
+        # Launch the game with start interface
         self.labpygame.interface()
 
         # Initialize the background music
@@ -60,13 +64,13 @@ class Application:
                 self.labpygame.background, (0, 480)
             )
 
-            # Display the bar info
+            # Display the information bar
             self.bar.display_bar()
 
             # Display elements(walls, floor, guardian) of the game
             self.maze_view.display_elements()
 
-            # Display hero of the game
+            # Display the hero of the game
             self.hero_view.display_hero()
 
             response = self.maze.fight_guardian()
@@ -74,9 +78,11 @@ class Application:
                 pygame.display.flip()
                 self.labpygame.clock.tick(FPS)
             elif response:
+                # Play the win sound and open a new window if the player wins
                 self.labpygame.play_win_sound()
                 self.labpygame.display_win()
             else:
+                # Play the game over sound and open a new window if the player loses
                 self.labpygame.play_gameover_sound()
                 self.labpygame.display_lose()
 
