@@ -92,12 +92,7 @@ class Maze(pygame.sprite.Sprite):
     # All conditions to fight with the guardian at the end
     def fight_guardian(self):
         if self.hero == self.exit:
-            if len(self.hero.inventory) == len(self.weapons):
-                return self.labpygame.display_win()
-            else:
-                return self.labpygame.display_lose()
-        else:
-            return False
+            return len(self.hero.inventory) == len(self.weapons)
 
     # Get random positions for weapons
     def random_positions_weapons(self):
