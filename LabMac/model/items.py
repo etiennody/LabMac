@@ -21,17 +21,11 @@ class Hero(Movement):
     def __repr__(self):
         return f"Hero({self.x}, {self.y})"
 
-    """Put weapon in inventory"""
     def pick_up_weapon(self, weapon):
+        """Put weapon in inventory"""
         self.inventory.append(weapon)
         weapon.x = None
         weapon.y = None
-
-    """Put positions weapons in inventory"""
-    def in_inventory(self):
-        self.inventory.append(self.set_position)
-        # return "You have found a weapon"
-        return f"You have {len(self.inventory)} weapon(s) in your inventory"
 
 
 class Weapon(Position):
