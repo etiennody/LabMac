@@ -12,7 +12,7 @@ Github:
 import sys
 import pygame
 
-from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, BGM, HERO, SPRITE_SIZE, WALL, FLOOR, GUARDIAN, NEEDLE, PIPE, ETHER, TEXT_COLOR, BACKGROUND_COLOR
+from LabMac.constants import WINDOW_WIDTH, WINDOW_HEIGHT, FPS, BGM, HERO, SPRITE_SIZE, WALL, FLOOR, GUARDIAN, NEEDLE, PIPE, ETHER, TEXT_COLOR, BACKGROUND_COLOR, GAMEOVER_SOUND, WIN_SOUND
 
 
 class LabPygame(pygame.sprite.Sprite):
@@ -77,18 +77,18 @@ class LabPygame(pygame.sprite.Sprite):
         clock = pygame.time.Clock()
         while True:
             self.window_surface.fill(BACKGROUND_COLOR)
-            button_1 = self.button(
+            button_start = self.button(
                 self.window_surface, (150, 290), 'START'
             )
-            button_2 = self.button(self.window_surface, (150, 390), 'QUIT')
+            button_quit = self.button(self.window_surface, (150, 390), 'QUIT')
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit(-1)
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if button_1.collidepoint(pygame.mouse.get_pos()):
+                    if button_start.collidepoint(pygame.mouse.get_pos()):
                         return True
-                    elif button_2.collidepoint(pygame.mouse.get_pos()):
+                    elif button_quit.collidepoint(pygame.mouse.get_pos()):
                         pygame.quit()
                         sys.exit(-1)
             pygame.display.update()
@@ -105,16 +105,13 @@ class LabPygame(pygame.sprite.Sprite):
             self.textPos.centerx = self.window_surface.get_rect().centerx
             self.textPos.centery = self.window_surface.get_rect().centery
             self.window_surface.blit(self.text, self.textPos)
-            button_1 = self.button(self.window_surface, (150, 290), 'RESTART')
-            button_2 = self.button(self.window_surface, (150, 390), 'QUIT')
+            button_quit = self.button(self.window_surface, (150, 390), 'QUIT')
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit(-1)
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if button_1.collidepoint(pygame.mouse.get_pos()):
-                        return True
-                    elif button_2.collidepoint(pygame.mouse.get_pos()):
+                    if button_quit.collidepoint(pygame.mouse.get_pos()):
                         pygame.quit()
                         sys.exit(-1)
             pygame.display.update()
@@ -131,16 +128,13 @@ class LabPygame(pygame.sprite.Sprite):
             self.textPos.centerx = self.window_surface.get_rect().centerx
             self.textPos.centery = self.window_surface.get_rect().centery
             self.window_surface.blit(self.text, self.textPos)
-            button_1 = self.button(self.window_surface, (150, 290), 'RESTART')
-            button_2 = self.button(self.window_surface, (150, 390), 'QUIT')
+            button_quit = self.button(self.window_surface, (150, 390), 'QUIT')
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit(-1)
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if button_1.collidepoint(pygame.mouse.get_pos()):
-                        return True
-                    elif button_2.collidepoint(pygame.mouse.get_pos()):
+                    if button_quit.collidepoint(pygame.mouse.get_pos()):
                         pygame.quit()
                         sys.exit(-1)
             pygame.display.update()
@@ -151,7 +145,21 @@ class LabPygame(pygame.sprite.Sprite):
         pygame.mixer.init()
         pygame.mixer.music.load(BGM)
         pygame.mixer.music.play(-1)
-        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.set_volume(0.1)
+
+    def play_win_sound(self):
+        """Launch the background music of the game"""
+        pygame.mixer.init()
+        pygame.mixer.music.load(WIN_SOUND)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.1)
+
+    def play_gameover_sound(self):
+        """Launch the background music of the game"""
+        pygame.mixer.init()
+        pygame.mixer.music.load(GAMEOVER_SOUND)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.1)
 
 
 class MazeView(pygame.sprite.Sprite):
